@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+{% load static %}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{title}}</title>
+   <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link rel="apple-touch-icon" href="{% static 'img/kahama.png'%}">
+    <link rel="icon" href="{% static 'img/mulogo.png'%}">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/mu.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" >
+    <style>
+    .custom-btn-primary {
+        color: #fff;
+        background-color: #fd876d;
+        border-color: #fd876d;
+    }
+
+    .bg-gradient-default {
+        background: #002E3B !important;
+    }
+
+    .gray-600 {
+        background-color: #f7fafc !important;
+    }
+
+    .text-color{
+        color: #dd8500;
+    }
+    .btn-color {
+        color: #dd8500cf;
+    }
+
+    @media (max-width: 423px) and (max-width: 423px){
+        img {
+            width: 5rem;
+        }
+        .login {
+            display: none;
+        }
+        .cnter-sm{
+            text-align: center;
+        }
+    }
+
+    .login-logo {
+        width: 8rem;
+    }
+
+    .display-4 {
+        font-size: calc(1.28775rem + .453vw);
+        font-weight: 600;
+    line-height: 1.5;
+    }
+</style>
+</head>
+<body id="page-top">
+
+    <div class="container pt-5 mt-5">
+        <div class="row justify-content-center">
+            <!-- <div class="col-xl-7 col-md-7">
+                <h3 class="text-white display-4"><b>MU-AR</b></h3>
+                <p class="text-light">Mzumbe University Academic Records Management System (MU-ARMS): is a web based 
+                    application which, among others, it keeps records of data and facilitates various 
+                    students’ academic functionalities which include;</p>
+            </div> -->
+            <div class="col-xl-5 col-md-5 wow fadeIn">
+                <div class="">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="p-2">
+                                <center>
+                                    <div class="login-logo">
+                                        <img src="{% static 'img/logo_police.png' %}" alt="" srcset="" width="100%">
+                                    </div>
+                                </center>
+                            </div>
+                            <div class=" p-2">
+
+                                {% if messages %}
+                                {% for message in messages %}
+                                {% if message.tags == 'success' %}
+                                    <div class="alert alert-danger alert-dismissible wow fadeInDown">
+                                        <p class="text-center pt-4"><b><i class="icon fa fa-danger"></i>{{ message|capfirst }}</b></p>
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                <div class="p-1">
+                                    <p class="text-center h4"><small>CRMS</small></p>
+                                </div>
+                                <form class="mr-auto ml-md-3 my-2 my-md-0 mw-100" action="{% url 'POLICE:login' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="input-group shadow-sm mt-3 wow fadeIn" data-wow-delay="0.2s">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-white" type="button">
+                                                <i class="fas fa-user fa-sm"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" name="username" class="form-control border-0 bg-white small pt-4 pb-4" placeholder="username" required>
+                                    </div>
+                                    <div class="input-group shadow-sm mt-4 wow fadeIn" data-wow-delay="0.4s">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-white" type="button">
+                                                <i class="fas fa-key fa-sm"></i>
+                                            </button>
+                                        </div>
+                                        <input type="password" name="password" class="form-control border-0 bg-white small pt-4 pb-4" placeholder="password" required>
+                                    </div>
+                                    <div class="input-group mt-4 mb-5  bounceIn" >
+                                        <button type="submit" name="login"  class="bg-primary text-light btn btn-block"> Login <i class="fa fa-sign-in-alt"></i>  </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
+}, 2000);
+</script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- others plugins -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/mu.js' %}"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

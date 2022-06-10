@@ -1,0 +1,165 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+
+{% block content %}
+<style>
+    input[type="search"] {
+        border-color: rgb(109, 109, 109);
+    }
+  .panel-new {
+        padding: 2rem;
+        border: 3px solid #ef4036;
+        border-right-style: none;
+        border-bottom-style: none;
+        border-top-style: none;
+    }
+</style>
+<div id="content-main">
+        <div class="panel panel-new" style=" display: flex; justify-content: space-between">
+            <div>
+        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;New Case  List &nbsp;<b>{{total}}</b></h3>
+
+
+       </div>
+
+
+    </div>
+
+    <div class="panel panel-body">
+        <table id="example" class="table table-striped table-bordered display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                   
+                    <th>#</th>
+                    <th>RB</th>
+                    <th>Complainant#</th>
+                    <th>Names</th>
+
+                    <th>Sex</th>
+                    <th>Contact</th>
+                    <th>Residency</th>
+                    <th>Case</th>
+                    <th>Date</th>
+                    <th>Action</th>
+
+                    <!-- <th>Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for case in cases %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{case.rb}}</td>
+                    <td>{{case.complainant.code}}</td>
+                    <td>{{case.complainant.user.first_name}} {{case.complainant.user.last_name}} </td>
+                     <td>{{case.complainant.user.sex}}</td>
+                       <td>{{case.complainant.user.phone}}</td>
+                     <td>{{case.complainant.user.residency}}</td>
+                     <td>
+							<a class=" mu-color pb-2" href="#"  data-toggle="modal" data-target="#{{forloop.counter}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
+
+						</td>
+                     <td>{{case.registered_on}}</td>
+                     <td>
+<a class="btn mu-bg mu-color pb-2" href="#"  data-toggle="modal" data-target="#{{case.id}}"> Assign Investigator &nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>
+
+</td>
+
+            <div>
+							<div id="{{case.id}}" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+								    <!-- Modal content-->
+								    <div class="modal-content">
+										<div class="modal-header mu-bg">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title text-center mu-color"> <b>Assign Investigator Form</b> </h4>
+										</div>
+										<div class="modal-body">
+											<form action="{% url 'POLICE:save_assigned_investigator' case.id %}" method="POST" enctype="multipart/form-data">
+												{% csrf_token %}
+                    	{% include 'includes/form.html'%}
+
+												<div class="form-group">
+													<div class="pt-3">
+														<button type="submit" class="btn mu-bg text-white btn-block">Save Investigator </button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="{{forloop.counter}}" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+								    <!-- Modal content-->
+								    <div class="modal-content">
+										<div class="modal-header mu-bg">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title text-center mu-color"> <b>Case Description</b> </h4>
+										</div>
+										<div class="modal-body">
+                                             <div class="list-group">
+                                                                 <a href="#" class="list-group-item mu-bg mu-color" style=" color: white;display: flex; justify-content: space-between"><span>1.0 INFORMATION </span></a>
+
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>RB</span> <span><b>{{case.rb}}</b></span></a>
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Complainant</span> <span><b>{{case.complainant.code}}</b></span></a>
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Crime</span> <span><b>{{case.crime}}</b></span></a>
+ </div>
+                                             <div class="list-group">
+                                                                 <a href="#" class="list-group-item mu-bg mu-color" style=" color: white;display: flex; justify-content: space-between"><span>2.0 DESCRIPTION</span></a>
+
+<a href="#" class="list-group-item text-justify" style=" display: flex;"> <span>{{case.description|safe}}</span></a>
+
+ </div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

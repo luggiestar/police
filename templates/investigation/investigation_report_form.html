@@ -1,0 +1,91 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+
+{% block content %}
+<style>
+    input[type="search"] {
+        border-color: rgb(109, 109, 109);
+    }
+  .panel-new {
+        padding: 2rem;
+        border: 3px solid #ef4036;
+        border-right-style: none;
+        border-bottom-style: none;
+        border-top-style: none;
+    }
+</style>
+<div id="content-main">
+
+
+    <div class="panel panel-body">
+													<form action="#" method="POST" enctype="multipart/form-data">
+
+<div class="col-xl-9 col-md-9 col-xs-12 col-sm-12 wow fadeIn" data-wow-delay="0.3s">
+										<div class="modal-header mu-bg">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title text-center mu-color"> <b>Investigation Report Form</b> </h4>
+										</div>
+										<div class="modal-body">
+												{% csrf_token %}
+                    	{% include 'includes/form.html'%}
+												{{form.media}}
+
+
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+ <div class="col-md-3 col-xl-3">
+
+
+		<div class="panel panel-body" style="background-color: #d2d6de66;">
+<h5 class="text-center color-black" style="margin-left: -0.6rem;margin-top: 0rem;"><b class="color-black">Action</b>
+						</h5>
+					<h4 class="text-justify color-black" ></h4>
+
+                 <hr class="text-muted" style="border-top: solid 1px;margin-top: 0rem" />
+			<div class="form-group">
+													<div class="pt-3">
+														<button type="submit" class="btn mu-bg mu-color btn-block">SAVE REPORT<i class="fa fa-next"></i> </button>
+													</div>
+												</div>
+
+
+
+		</div>
+
+    </div>
+															</form>
+		 <div class="col-md-3 col-xl-3">
+
+
+		<div class="panel panel-body" style="background-color: #d2d6de66;">
+
+
+                 <hr class="text-muted" style="border-top: solid 1px;margin-top: 0rem" />
+
+ <div class="list-group">
+                                                                 <a href="#" class="list-group-item mu-bg mu-color text-center" style=" color: white;display: flex;"><span>COMPLAINANT DETAILS</span></a>
+
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-between">  <span>Complainant#:</span> <span><b>{{complaint.code}}</b></span></a>
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-between">  <span>Full Name:</span> <span><b>{{complaint.user.first_name}}-{{complaint.user.last_name}}</b></span></a>
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-between">  <span>Contact</span> <span><b>{{complaint.user.phone}}</b></span></a>
+<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-between">  <span>Residency</span> <span><b>{{complaint.user.residency}}</b></span></a>
+ </div>
+
+
+
+
+			</div>
+		</div>
+</div>
+</div>
+{% endblock %}

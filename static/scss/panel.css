@@ -1,0 +1,73 @@
+.skin-green .sidebar-menu > li.header {
+  color: #fff;
+  background: #2569be;
+}
+
+.bg-ligth-gray {
+  background-color: #ecf0f5;
+}
+
+.bg-green {
+  background-color: rgb(59, 129, 59);
+}
+
+.skin-green .sidebar-menu > li.active > a {
+  color: #ffffff;
+  background: #2569be;
+  border-left-color: #1e5394;
+}
+
+.skin-green .sidebar-menu > li > .treeview-menu {
+  margin: 0 1px;
+  background: #1e5394;
+}
+
+.box {
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  border-top: 3px solid #d2d6de;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.box.box-primary {
+  border-top: none;
+}
+
+.skin-green .main-header .navbar .sidebar-toggle {
+  color: #2569be;
+}
+
+.text-blue {
+  color: #2569be;
+}
+
+.actions {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  margin-top: -2rem;
+  margin-left: -1.7rem;
+}
+
+.object-tools {
+  list-style-type: none;
+  margin-top: 5rem;
+  margin-left: -3.5rem;
+  margin-bottom: -8rem;
+}
+
+.object-tools li a {
+  float: left;
+  margin-left: 12px;
+  background-color: #2569be;
+  color: white;
+  padding: 7px;
+  border-radius: 2px;
+}
+
+.object-tools .btn.btn-success {
+  margin-top: 0.5px;
+  margin-left: 1rem;
+}/*# sourceMappingURL=panel.css.map */

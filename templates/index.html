@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <div class="container p-5">
+        <!-- welcome note  -->
+        <div class="pt-5 pb-5">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="igp-image">
+                        <h2>Welcome Note From IGP</h2>
+                        <p class="about-font text-justify">
+                            Umoja na ushirikiano kati ya Jeshi la Polisi Tanzania na wananchi ndio
+                        silaha kuu itakayotusaidia katika mapambano dhidi ya uhalifu na wahalifu.
+                        Tukishikamana na kuwa na umoja kama wa siafu, hakuna mhalifu
+                        atakayepata nafasi ya kufanya uhalifu popote katika nchi yetu.
+                        Siafu ni wadudu ambao kila mmoja wetu ameshawahi kukutana nao au
+                        kuwafahamu. Hawa ni wadudu wa ajabu sana ambao hutenda kazi zao
+                        kwa umoja na ushirikiano wa hali ya juu huku wakiwa na mgawanyo wa
+                        majukumu kuanzia ulezi wa familia, watendaji kazi mpaka ulinzi wa himaya
+                        zao.
+                        Kutokana na mfumo wao wa maisha utajifunza kuwa duniani silaha kuu
+                        ni umoja na ushirikiano kwani pamoja na udogo wao, siafu wanauwezo
+                        wa kuwapiga na hata wakati mwingine kuwaua adui zao wenye miili na
+                        maumbo makubwa akiwemo nyoka.
+                        Shime wananchi tushikamane na kuungana na Jeshi la Polisi Tanzania
+                        katika kubaini, kuzuia na kutanzua uhalifu ili Tanzania yetu iendelee kuwa
+                        salama.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="igp-image">
+                        <center>
+                        <img src="{% static 'img/IGP-TZ-250pixel-x-300pixel.jpg' %}" alt="" srcset="">
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- about us -->
+    <div class="pt-10 pb-10 bg-light">
+        <div class="container">
+            <h1 class="text-center display-4">About Us</h1>
+            <p class="about-font text-center">There are many variations of passages of Lorem Ipsum available, but the majority have suffered 
+                alteration in some form, by injected humour, or randomised words which don't look even slightly 
+                believable.
+    
+                If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing 
+                hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined 
+                chunks as necessary, making this the first true generator on the Internet. 
+        
+                It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, 
+                to generate Lorem Ipsum which looks reasonable.The generated Lorem Ipsum is therefore always free from 
+                repetition, injected humour, or non-characteristic words etc.
+            </p>
+        </div>
+    </div>
+    <div class="container-fluid p-5 bg-blue">
+        <h1 class="text-white text-center">What is our Services</h1>
+        <p class="text-white text-center">The peace and protection is what we care so we makes it easy to report offences ! </p> 
+    
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-4 mt-3">
+                    <div class="height-400 card shadow shadow-hover">
+                        <div class="card-body">
+                            <img src="{% static 'img/ussd.svg' %}" alt="" srcset="" width="30%">
+                            <div class="p-3">
+                                <h3>USSD</h3>
+                                <p><strong>USSD</strong> stands for Unstructured Supplementary Service Data. 
+                                    is a Global System for Mobile Communications (GSM) protocol that is used to send text messages.</p>
+                                <p>To access our <strong>USSD</strong> make call os *1232*02#</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <div class="height-400 card shadow h-100">
+                        <div class="card-body">
+                            <i class="fa fa-cogs fa-5x p-3 mb-1 text-blue"></i>
+                            <img src="" alt="" srcset="" width="30%">
+                            <div class="p-3">
+                                <h3>Web-Access</h3>
+                                <p><strong>Web System</strong> The web system allow you to have an online account
+                                for those who use startphone and loptop.
+                                </p>
+                                <p>It easy to use and have interesting fetures like sending viewing your history</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <div class="height-400 card shadow h-100">
+                        <div class="card-body">
+                            <img src="{% static 'img/ussd.svg' %}" alt="" srcset="" width="30%">
+                            <div class="p-3">
+                                <h3>SMS</h3>
+                                <p><strong>SMS</strong> stands for Short Massage. 
+                                    is a Global System for Mobile Communications (GSM) protocol that is used to send text messages.</p>
+                                <p>To access our <strong>USSD</strong> make call os *1232*02#</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- contact us -->
+    <section class="pt-5 pb-5"> 
+        <p class="display-4 text-center">Get Intouch</p>
+
+            <div class="row justify-content-center">
+                <div class="col-sm-4 border-dotted">
+                    <div class=" text-center p-4">
+                        <i class="fa fa-phone fa-3x text-blue"></i>
+                        <h6 class="pt-3 font-weight-3 letter-space-2"> +255 789 675 890 </h6>
+                    </div>
+                </div>
+                <div class="col-sm-4 border-dotted">
+                    <div class="text-center p-4">
+                        <i class="fa fa-envelope fa-3x text-blue"></i>
+                        <h6 class="pt-3"> +255 789 675 890 </h6>
+                    </div>
+                </div>
+                <div class="col-sm-4 border-dotted">
+                    <div class="text-center p-4">
+                        <i class="fa fa-map-marker fa-3x text-blue"></i>
+                        <h6 class="pt-3"> +255 789 675 890 </h6>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}
