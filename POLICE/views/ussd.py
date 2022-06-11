@@ -26,7 +26,7 @@ def ussd(request):
 
             get_code = Complainant.objects.filter(code=text).count()
             if get_code >= 1:
-                get_complaint = Complainant.objects.filter(code=text).first
+                get_complaint = Complainant.objects.filter(code=text).first()
                 code = get_complaint.code
 
                 response = "CON Karibu {0}: -{1}-{2}\nIngiza Moja Kuendelea".format(get_complaint.code,
