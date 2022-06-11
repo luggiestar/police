@@ -36,13 +36,14 @@ def ussd(request):
                 response += "CON Karibu {0}: {1} {2} \n1. Endelea ".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name)
-
-            # else:
-            #     response = "END umechagua moja {0}".format(text)
-
-            elif text == "{0}*1".format(text_array[0]):
-
-                response = "END umechagua moja {0}".format(text_array[0])
+                if get_number == 1 and text == "{0}*1".format(code):
+                    response = "END umechagua moja {0}".format(get_number)
+                # else:
+                #     response = "END umechagua moja {0}".format(text)
 
 
+
+            else:
+
+                response = "END Namba si sahihi, Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
         return HttpResponse(response)
