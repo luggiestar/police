@@ -38,11 +38,12 @@ def save_assigned_investigator(request, get_case):
 
 
 def regional_cases(request):
-    title = "Regional Cases Progress"
+    title = "Regional Cases Reports"
+
     template = 'senior_officer/regional_cases.html'
-    # get_investigator = get_object_or_404(Staff, user=request.user)
-    cases = Case.objects.all()
-    total = Case.objects.all().count()
+
+    cases = CaseInvestigator.objects.filter(case__registerer__station__district__region=request.user.station.district.region)
+    total = CaseInvestigator.objects.filter(case__registerer__station__district__region=request.user.station.district.region).count()
 
     context = {
         'title': title,
@@ -53,10 +54,11 @@ def regional_cases(request):
 
 
 def regional_cases_report(request, code):
+    title = "Regional Cases Progress"
+
     rb_number = get_object_or_404(Case, id=code)
-    title = "Regional Cases Reports"
     template = 'senior_officer/regional_cases_report.html'
-    get_object_or_404(Staff, user=request.user)
+    # get_object_or_404(Staff, user=request.user)
     get_investigation = CaseInvestigator.objects.filter(case=rb_number).first()
     cases = InvestigationRecord.objects.filter(case_investigator__case=rb_number).order_by('-id')
     total = InvestigationRecord.objects.filter(case_investigator__case=rb_number).count()

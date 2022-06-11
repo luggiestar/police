@@ -11,7 +11,8 @@ User = get_user_model()
 def investigation_list(request):
     title = "Investigations List"
     template = 'investigation/investigation_list.html'
-    get_investigator = get_object_or_404(Staff, user=request.user)
+    # get_investigator = get_object_or_404(Staff, user=request.user)
+    get_investigator = request.user
     cases = CaseInvestigator.objects.filter(investigator=get_investigator)
     total = CaseInvestigator.objects.filter(investigator=get_investigator).count()
 
@@ -40,7 +41,8 @@ def investigation_report_list(request, code):
     rb_number = get_object_or_404(Case, id=code)
     title = "Investigations Report"
     template = 'investigation/investigation_report.html'
-    get_object_or_404(Staff, user=request.user)
+    # get_investigator = get_object_or_404(Staff, user=request.user)
+    get_investigator = request.user
     get_investigation = CaseInvestigator.objects.filter(case=rb_number).first()
     cases = InvestigationRecord.objects.filter(case_investigator__case=rb_number).order_by('-id')
     total = InvestigationRecord.objects.filter(case_investigator__case=rb_number).count()
@@ -58,7 +60,7 @@ def create_report(request, investigation):
     title = "Investigation Report Form"
     template = 'investigation/investigation_report_form.html'
     get_investigated_case = get_object_or_404(CaseInvestigator, id=investigation)
-    get_staff = get_object_or_404(Staff, user=request.user)
+    get_investigator = request.user
     get_complainant=Complainant.objects.filter(id=get_investigated_case.case.complainant.id).first()
     form = InvestigationReportForm()
     if request.method == "POST":

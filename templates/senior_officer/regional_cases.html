@@ -23,7 +23,7 @@
 <div id="content-main">
         <div class="panel panel-new" style=" display: flex; justify-content: space-between">
             <div>
-        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Regional Case &nbsp;<b>({{total}})</b></h3>
+        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Regional Investigation Cases &nbsp;<b>({{total}})</b></h3>
 
 
        </div>
@@ -46,17 +46,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for case in cases %}
+                {% for x in cases %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-                    <td><a href="{% url 'POLICE:regional_cases_report' case.id %}">{{case.rb}}</a>  </td>
-                    <td>{{case.complainant.code}}</td>
+                    <td><a href="{% url 'POLICE:regional_cases_report' x.case.id %}">{{x.case.rb}}</a>  </td>
+                    <td>{{x.case.complainant.code}}</td>
 
                      <td>
 							<a class=" mu-color pb-2" href="#"  data-toggle="modal" data-target="#{{forloop.counter}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
 
 						</td>
-                     <td>{{case.registered_on}}</td>
+                     <td>{{x.case.registered_on}}</td>
 
 
 

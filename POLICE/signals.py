@@ -20,78 +20,79 @@ def id_generator(size=4, chars=string.digits):
 
 
 #
-@receiver(post_save, sender=User, dispatch_uid='save_complaint')
-def save_complaint(sender, instance, created, raw=False, **kwargs):
-    if created and instance.title == "complaint":
-        Complainant.objects.create(user=instance)
+# @receiver(post_save, sender=User, dispatch_uid='save_complaint')
+# def save_complaint(sender, instance, created, raw=False, **kwargs):
 
 
 @receiver(post_save, sender=User, dispatch_uid='save_staff')
 def save_staff(sender, instance, created, raw=False, **kwargs):
-    try:
-        if created and instance.is_superuser is False:
-            if not instance.title == "complaint":
-                URL = 'https://apisms.beem.africa/v1/send'
-                api_key = '2799f1a807695012'
-                secret_key = 'YTU2NTkxZjQxZDc4NTY2NGZiZTVkYzI5ZWU1MzFmYzM4NzA4MTBkYjk5NWE4MzZmZmU0MjQ2OTU3YjJjN2IxZg===='
-                content_type = 'application/json'
-                source_addr = 'INFO'
-                apikey_and_apisecret = api_key + ':' + secret_key
+    if created and instance.title == "complaint":
+        Complainant.objects.create(user=instance)
+    else:
+        try:
+            if created and instance.is_superuser is False:
+                if not instance.title == "complaint":
+                    URL = 'https://apisms.beem.africa/v1/send'
+                    api_key = '2799f1a807695012'
+                    secret_key = 'YTU2NTkxZjQxZDc4NTY2NGZiZTVkYzI5ZWU1MzFmYzM4NzA4MTBkYjk5NWE4MzZmZmU0MjQ2OTU3YjJjN2IxZg===='
+                    content_type = 'application/json'
+                    source_addr = 'INFO'
+                    apikey_and_apisecret = api_key + ':' + secret_key
 
-                '''Get name and concatenate them'''
-                first_name = instance.first_name
-                password = instance.last_name.upper()
-                last_name = instance.last_name
-                title = instance.title
-                username = instance.username
+                    '''Get name and concatenate them'''
+                    first_name = instance.first_name
+                    password = instance.last_name.upper()
+                    last_name = instance.last_name
+                    title = instance.title
+                    username = instance.username
 
-                full_name = f"{first_name} {last_name}"
+                    full_name = f"{first_name} {last_name}"
 
-                '''Get phone detail and convert and user id as recipient_id on api'''
-                # number= "255755422199"
-                phone = str(instance.phone)
-                # phone = str(number)
-                phone = phone[1:10]
-                # phone = phone
-                phone = '255' + phone
+                    '''Get phone detail and convert and user id as recipient_id on api'''
+                    # number= "255755422199"
+                    phone = str(instance.phone)
+                    # phone = str(number)
+                    phone = phone[1:10]
+                    # phone = phone
+                    phone = '255' + phone
 
-                user_id = instance.id
+                    user_id = instance.id
 
-                message_body = f"Habari,Ndugu {full_name}, \nUmesajiliwa Kikamilifu kwenye Mfumo wa Polisi kama {title}" \
-                               f"\nWaweza kuingia kwenye Mfumo  kupitia\n" \
-                               f"https://www.polisi.go.tz" \
-                               f"\nUsername:{username},\nPassword:{password} "
+                    message_body = f"Habari,Ndugu {full_name}, \nUmesajiliwa Kikamilifu kwenye Mfumo wa Polisi kama {title}" \
+                                   f"\nWaweza kuingia kwenye Mfumo  kupitia\n" \
+                                   f"https://crms-police.herokuapp.com/" \
+                                   f"\nUsername:{username},\nPassword:{password} "
 
-                print(message_body)
-                first_request = requests.post(url=URL, data=json.dumps({
-                    'source_addr': source_addr,
-                    'schedule_time': '',
-                    'encoding': '0',
-                    'message': message_body,
-                    'recipients': [
-                        {
-                            'recipient_id': user_id,
-                            'dest_addr': phone,
-                        },
-                    ],
-                }),
+                    print(message_body)
+                    first_request = requests.post(url=URL, data=json.dumps({
+                        'source_addr': source_addr,
+                        'schedule_time': '',
+                        'encoding': '0',
+                        'message': message_body,
+                        'recipients': [
+                            {
+                                'recipient_id': user_id,
+                                'dest_addr': phone,
+                            },
+                        ],
+                    }),
 
-                                              headers={
-                                                  'Content-Type': content_type,
-                                                  'Authorization': 'Basic ' + api_key + ':' + secret_key,
-                                              },
+                                                  headers={
+                                                      'Content-Type': content_type,
+                                                      'Authorization': 'Basic ' + api_key + ':' + secret_key,
+                                                  },
 
-                                              auth=(api_key, secret_key), verify=False)
+                                                  auth=(api_key, secret_key), verify=False)
 
-                print(first_request.status_code)
-                if first_request.status_code == 200:
-                    full_name = ''
-                    phone = ''
-                print(first_request.json())
+                    print(first_request.status_code)
+                    if first_request.status_code == 200:
+                        full_name = ''
+                        phone = ''
+                    print(first_request.json())
 
 
-    except:
-        pass
+        except:
+            pass
 
 
 @receiver(post_save, sender=Case, dispatch_uid='generate_the_rb')
@@ -134,7 +135,70 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
         user_id = instance.complainant.user.id
 
         message_body = f"Habari,Ndugu Namba: {full_name}, \nJarada lako limefunguliwa kikamilifu kwa RB:\n {get_rb_string}" \
-                       f"\nWaweza Bofya *149*01# kufuatilia mwenendo wa Jarida\nAu ingia kwenye tovuti Kwa taarifa zaidi"
+                       f"\nWaweza Bofya *149*01# kufuatilia mwenendo wa " \
+                       f"Jarida\nAu ingia kwenye tovuti Kwa taarifa zaidi \n https://crms-police.herokuapp.com/"
+
+        first_request = requests.post(url=URL, data=json.dumps({
+            'source_addr': source_addr,
+            'schedule_time': '',
+            'encoding': '0',
+            'message': message_body,
+            'recipients': [
+                {
+                    'recipient_id': user_id,
+                    'dest_addr': phone,
+                },
+            ],
+        }),
+
+                                      headers={
+                                          'Content-Type': content_type,
+                                          'Authorization': 'Basic ' + api_key + ':' + secret_key,
+                                      },
+
+                                      auth=(api_key, secret_key), verify=False)
+
+        print(first_request.status_code)
+        if first_request.status_code == 200:
+            full_name = ''
+            phone = ''
+        print(first_request.json())
+
+    # return (first_request.json())
+
+
+@receiver(post_save, sender=InvestigationRecord, dispatch_uid='send_investigation_alert')
+def send_investigation_alert(sender, instance, created, **kwargs):
+    if created:
+
+        URL = 'https://apisms.beem.africa/v1/send'
+        api_key = '2799f1a807695012'
+        secret_key = 'YTU2NTkxZjQxZDc4NTY2NGZiZTVkYzI5ZWU1MzFmYzM4NzA4MTBkYjk5NWE4MzZmZmU0MjQ2OTU3YjJjN2IxZg===='
+        content_type = 'application/json'
+        source_addr = 'INFO'
+        apikey_and_apisecret = api_key + ':' + secret_key
+
+        '''Get name and concatenate them'''
+        get_rb = instance.case_investigator.case.rb
+        get_code = instance.case_investigator.case.complainant.code
+        code = f"{get_code}"
+
+        '''Get amount invested and daily amount earning'''
+
+
+        '''Get phone detail and convert and user id as recipient_id on api'''
+        # number= "255755422199"
+        phone = str(instance.case_investigator.case.complainant.user.phone)
+        # phone = str(number)
+        phone = phone[1:10]
+        # phone = phone
+        phone = '255' + phone
+
+        user_id = instance.case_investigator.case.complainant.user.id
+
+        message_body = f"Habari,Ndugu Namba: {code}, \nJarada namba:\n {get_rb}" \
+                       f"\nLimefanyiwa maboresho, tafadhali ingia kwenye tovuti kwa taarifa zaidi\n"\
+                                   f"https://crms-police.herokuapp.com/"
 
         print(message_body)
         first_request = requests.post(url=URL, data=json.dumps({
@@ -163,7 +227,9 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
             phone = ''
         print(first_request.json())
 
-    # return (first_request.json())
+        # return (first_request.json())
+
+
 
 
 #
@@ -200,7 +266,7 @@ def send_feedback_to_complaint(sender, instance, created, **kwargs):
 
         message_body = f"Habari,Ndugu {full_name}, \nUmesajiliwa Kikamilifu kwenye Mfumo wa Polisi kwa namba {code}" \
                        f"\nWaweza kuingia kwenye Mfumo  kupitia\n" \
-                       f"https://www.polisi.go.tz" \
+                       f"https://crms-police.herokuapp.com/" \
                        f"\n username:{username},\n password:{password} "
 
         print(message_body)

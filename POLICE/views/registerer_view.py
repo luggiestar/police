@@ -22,6 +22,7 @@ def case_list(request):
             get_password = form.cleaned_data['last_name']
             make_password_upper_case = get_password.upper()
             save_form.username = get_username
+            save_form.title = "complaint"
             save_form.set_password(make_password_upper_case)
             save_form.save()
 
@@ -40,13 +41,15 @@ def create_case(request, get_user):
     title = "Case registration"
     template = 'police/case_registration.html'
     get_user = get_object_or_404(Complainant, user__username=get_user)
-    get_staff = get_object_or_404(Staff, user=request.user)
+    get_staff = User.objects.filter(id=request.user.id, title="registerer")
+
     form = CaseForm()
     if request.method == "POST":
         form = CaseForm(request.POST)
         if form.is_valid():
             save_form = form.save(commit=False)
             save_form.complainant = get_user
+            # save_form.registerer = request.user
             save_form.registerer = get_staff
 
             save_form.save()
@@ -93,13 +96,14 @@ def add_complainant_case(request, get_code):
     title = "Case registration"
     template = 'police/case_registration.html'
     get_user = get_object_or_404(Complainant, code=get_code)
-    get_staff = get_object_or_404(Staff, user=request.user)
+    get_staff = User.objects.filter(id=request.user.id, title="registerer")
     form = CaseForm()
     if request.method == "POST":
         form = CaseForm(request.POST)
         if form.is_valid():
             save_form = form.save(commit=False)
             save_form.complainant = get_user
+            # save_form.registerer = request.user
             save_form.registerer = get_staff
 
             save_form.save()
