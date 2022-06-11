@@ -45,7 +45,7 @@ def staff_entry(request):
             save_form.is_staff = True
             save_form.set_password(make_password_upper_case)
             save_form.save()
-            messages.success(request, 'created successfully!')
+            messages.success(request, f'{get_pas} created successfully!')
 
             return redirect('POLICE:staff_list')
 
