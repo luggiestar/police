@@ -32,10 +32,10 @@ def ussd(request):
                 response += "CON Karibu {0}: {1} {2} \n1. Endelea".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name,)
-                if get_code >= 1 and text == "{0}*1".format(text_array[0]):
-                    response = "END umechagua moja {0}".format(text_array[0])
-                # else:
-                #     response = "END umechagua moja {0}".format(text)
+            if get_code >= 1 and text == "{0}*1".format(text_array[0]):
+                response = "END umechagua moja {0}".format(text_array[0])
+            # else:
+            #     response = "END umechagua moja {0}".format(text)
 
 
 
