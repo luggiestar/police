@@ -16,40 +16,38 @@
 
 </style>
 <div id="content-main">
-        <div class="panel panel-new" style=" display: flex; justify-content: between">
-            <div style="padding: 3px;">
-                <h3> <i class="fa fa-info-circle fa-1x fa-sm"></i>&nbsp;Staff List &nbsp;<b>{{total}}</b></h3>
+        <div class="panel panel-new" style="padding:1rem; display: flex; justify-content: space-between">
+            <div>
+                <h5> <i class="fa fa-info-circle fa-1x fa-sm"></i>&nbsp;Staff List &nbsp;<b>{{total}}</b></h5>
             </div>
             <div>
-				<a class="btn mu-bg mu-color pb-2" href="#"  data-toggle="modal" data-target="#newTask2"> 
+				<a class="btn btn-primary  text-white" href="#"  data-toggle="modal" data-target="#newTask2"> 
                     Add Staff &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             </div>
-            <div>
-				<div id="newTask2" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header mu-bg">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title text-center mu-color"> <b>Staff Registration</b> </h4>
-							</div>
-							<div class="modal-body">
-								<form action="#" method="POST" enctype="multipart/form-data">
-									{% csrf_token %}
-                    	            {% include 'includes/form.html'%}
-                                    <div class="form-group">
-                                        <div class="pt-3">
-                                            <button type="submit" class="btn mu-bg text-white btn-block">Next Step <i class="fa fa-next"></i> </button>
-                                        </div>
-                                    </div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+        </div>
+        <div id="newTask2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center text-white"> <b>Staff Registration</b> </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% include 'includes/form.html'%}
+                            <div class="form-group">
+                                <div class="pt-3">
+                                    <button type="submit" class="btn btn-primary text-white btn-block">Next Step <i class="fa fa-next"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary text-white" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
