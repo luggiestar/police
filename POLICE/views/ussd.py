@@ -29,9 +29,9 @@ def ussd(request):
                 get_complaint = Complainant.objects.filter(code=text).first()
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: -{1}-{2} \nIngiza Moja Kuendelea".format(get_complaint.code,
+                response += "CON Karibu {0}: {1} {2} \n1. Endelea {3}".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
-                                                                                get_complaint.user.last_name)
+                                                                                get_complaint.user.last_name,text)
                 if get_code >= 1 and text == "{0}*1".format(code):
                     response = "END umechagua moja"
                 else:
