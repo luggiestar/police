@@ -26,8 +26,16 @@ def ussd(request):
 
             get_code = Complainant.objects.filter(code=text).count()
             if get_code >= 1:
+                get_complaint = Complainant.objects.filter(code=text).first
+                code = get_complaint.code
 
-                response = "CON welcome {0}: -{1}-{2}"
+                response = "CON Karibu {0}: -{1}-{2}\nIngiza Moja Kuendelea".format(get_complaint.code,
+                                                                                    get_complaint.user.first_name,
+                                                                                    get_complaint.user.last_name)
+                if get_code == 1 and text == "{0}*1".format(code):
+                    response = "END umechagua moja"
+
+
             else:
 
                 response = "END Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
