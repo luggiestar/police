@@ -33,9 +33,9 @@ def ussd(request):
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name,text)
                 if get_code >= 1 and text == "{0}*1".format(code):
-                    response = "END umechagua moja"
+                    response = "END umechagua moja {0}".format(text)
                 else:
-                    response = "END umechagua moja"
+                    response = "END umechagua moja {0}".format(text)
 
 
 
