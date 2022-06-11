@@ -1,3 +1,5 @@
+from itertools import count
+
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
@@ -14,6 +16,7 @@ def ussd(request):
         text = request.POST.get('text')
         text_array = text.split("*")
         user_response = text_array[len(text_array) - 1]
+        level = count(text_array)
 
         response = ""
 
@@ -29,13 +32,15 @@ def ussd(request):
                 get_complaint = Complainant.objects.filter(code=text).first()
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: {1} {2} \n1. Endelea".format(get_complaint.code,
-                                                                          get_complaint.user.first_name,
-                                                                          get_complaint.user.last_name, )
-            elif user_response == 1:
-                response = "END umechagua moja {0}".format(text_array[0])
-            # else:
-            #     response = "END umechagua moja {0}".format(text)
+                response += "CON Karibu {0}: {1} {2} \n1. Endelea {3}".format(get_complaint.code,
+                                                                                get_complaint.user.first_name,
+                                                                                get_complaint.user.last_name,level)
+                if get_code >= 1 and text == "{0}*1".format(text_array[0]):
+                    response = "END umechagua moja {0}".format(text_array[0])
+                # else:
+                #     response = "END umechagua moja {0}".format(text)
+
+
 
             else:
 
