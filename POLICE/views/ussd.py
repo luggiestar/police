@@ -30,6 +30,6 @@ def ussd(request):
                 response = "CON welcome {0}: -{1}-{2}"
             else:
 
-                response = "CON Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "END Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
 
         return HttpResponse(response)
