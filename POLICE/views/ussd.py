@@ -45,6 +45,6 @@ def ussd(request):
 
             else:
 
-                response = "END Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "END Namba {0}".format(text)
 
         return HttpResponse(response)
