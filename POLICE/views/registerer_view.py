@@ -106,6 +106,7 @@ def add_complainant_case(request, get_code):
             # save_form.registerer = request.user
             save_form.registerer = request.user
 
+
             save_form.save()
 
             return redirect('POLICE:complainant_details', code=get_user.code)
