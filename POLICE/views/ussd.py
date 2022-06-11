@@ -24,12 +24,12 @@ def ussd(request):
 
         elif text:
 
-            try:
-                get_code = Complainant.objects.filter(code=text).first()
-                number.append(get_code.code)
+            get_code = Complainant.objects.filter(code=text).count()
+            if get_code >= 1:
 
                 response = "CON welcome {0}: -{1}-{2}"
-            except:
+            else:
+
                 response = "CON Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
 
         return HttpResponse(response)
