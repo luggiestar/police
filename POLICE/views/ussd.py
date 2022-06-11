@@ -36,8 +36,7 @@ def ussd(request):
                 response += "CON Karibu {0}: {1} {2} \n1. Endelea ".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name)
-            elif text == "{0}*1".format(get_number):
-                response = "END umechagua moja {0}".format(get_number)
+
             # else:
             #     response = "END umechagua moja {0}".format(text)
 
@@ -46,5 +45,7 @@ def ussd(request):
             else:
 
                 response = "END Namba {0}".format(text)
+        elif text == "{0}*1".format(text_array[0]):
+            response = "END umechagua moja {0}".format(text_array[0])
 
         return HttpResponse(response)
