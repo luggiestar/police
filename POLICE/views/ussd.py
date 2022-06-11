@@ -40,12 +40,9 @@ def ussd(request):
             # else:
             #     response = "END umechagua moja {0}".format(text)
 
+            elif text == "{0}*1".format(text_array[0]):
 
+                response = "END umechagua moja {0}".format(text_array[0])
 
-            else:
-
-                response = "END Namba {0}".format(text)
-        elif text == "{0}*1".format(text_array[0]):
-            response = "END umechagua moja {0}".format(text_array[0])
 
         return HttpResponse(response)
