@@ -12,7 +12,7 @@ def ussd(request):
         service_code = request.POST.get('serviceCode')
         phone_number = request.POST.get('phoneNumber')
         text = request.POST.get('text')
-        data = text.split(text)
+        data = text.split('')
 
         response = ""
 
@@ -21,7 +21,7 @@ def ussd(request):
             # response .= "1. My Account \n"
             # response += "1. My Phone Number"
 
-        elif data:
-            response = "END My Phone number is {0}".format(data)
+        elif data[0]:
+            response = "END My Phone number is {0}".format(data[0])
 
         return HttpResponse(response)
