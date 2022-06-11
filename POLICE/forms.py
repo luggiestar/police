@@ -50,7 +50,7 @@ class StaffRegistrationForm(ModelForm):
 class AssignInvestigatorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(AssignInvestigatorForm, self).__init__(*args, **kwargs)  # populates the post
-        self.fields['investigator'].queryset = User.objects.filter(title="senior")
+        self.fields['investigator'].queryset = User.objects.filter(title="investigator")
 
     class Meta:
         model = CaseInvestigator
