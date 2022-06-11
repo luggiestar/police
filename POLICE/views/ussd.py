@@ -28,8 +28,8 @@ def ussd(request):
                 get_code = Complainant.objects.filter(code=text).first()
                 number.append(get_code.code)
 
-                response = "welcome {0}: -{1}-{2}"
+                response = "CON welcome {0}: -{1}-{2}"
             except:
-                response = "Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "CON Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
 
         return HttpResponse(response)
