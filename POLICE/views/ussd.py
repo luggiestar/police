@@ -16,7 +16,7 @@ def ussd(request):
         text = request.POST.get('text')
         text_array = text.split("*")
         user_response = text_array[len(text_array) - 1]
-        level = count(text_array)
+        # level = count(text_array)
 
         response = ""
 
@@ -28,15 +28,16 @@ def ussd(request):
         elif text:
 
             get_code = Complainant.objects.filter(code=text).count()
-            if get_code >= 1:
+            get_number=get_code
+            if get_number == 1:
                 get_complaint = Complainant.objects.filter(code=text).first()
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: {1} {2} \n1. Endelea {3}".format(get_complaint.code,
+                response += "CON Karibu {0}: {1} {2} \n1. Endelea ".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
-                                                                                get_complaint.user.last_name,level)
-                if get_code >= 1 and text == "{0}*1".format(text_array[0]):
-                    response = "END umechagua moja {0}".format(text_array[0])
+                                                                                get_complaint.user.last_name)
+                if get_number == 1 and text == "{0}*1".format(code):
+                    response = "END umechagua moja {0}".format(code)
                 # else:
                 #     response = "END umechagua moja {0}".format(text)
 
