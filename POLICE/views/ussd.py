@@ -2,7 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 # Create your views here.
-from CRMS.POLICE.models import Complainant
+from ..models import Complainant
 
 
 @csrf_exempt
@@ -28,13 +28,8 @@ def ussd(request):
                 get_code = Complainant.objects.filter(code=text).first()
                 number.append(get_code.code)
 
-                response = "welcome {0}: -{1}-{2}".format(get_code.code, get_code.user.first_name,get_code.user.last_name)
+                response = "welcome {0}: -{1}-{2}"
             except:
                 response = "Namba si sahihi Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
-
-
-
-
-
 
         return HttpResponse(response)
