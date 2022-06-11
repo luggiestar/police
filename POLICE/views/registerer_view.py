@@ -50,7 +50,7 @@ def create_case(request, get_user):
             save_form = form.save(commit=False)
             save_form.complainant = get_user
             # save_form.registerer = request.user
-            save_form.registerer = get_staff
+            save_form.registerer = request.user
 
             save_form.save()
 
@@ -104,7 +104,7 @@ def add_complainant_case(request, get_code):
             save_form = form.save(commit=False)
             save_form.complainant = get_user
             # save_form.registerer = request.user
-            save_form.registerer = get_staff
+            save_form.registerer = request.user
 
             save_form.save()
 
