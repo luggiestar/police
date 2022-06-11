@@ -41,7 +41,8 @@ def staff_entry(request):
             get_username = form.cleaned_data['phone']
             get_pas = form.cleaned_data['last_name']
             make_password_upper_case = get_pas.upper()
-            save_form.username=get_username
+            save_form.username = get_username
+            save_form.is_staff = True
             save_form.set_password(make_password_upper_case)
             save_form.save()
             messages.success(request, 'created successfully!')
