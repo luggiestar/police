@@ -6,6 +6,7 @@ from .views import *
 app_name = 'POLICE'
 urlpatterns = [
     # path('', index, name="index"),
+    path('ussd/', ussd, name="ussd"),
     path('case-list', case_list, name="case_list"),
     path('staff-list', staff_entry, name="staff_list"),
     path('update-user/<object_pk>', update_staff, name="update_staff"),
