@@ -13,7 +13,7 @@ def ussd(request):
         phone_number = request.POST.get('phoneNumber')
         text = request.POST.get('text')
         text_array = text.split("*")
-        # user_response = text_array[len(text_array) - 1]
+        user_response = text_array[len(text_array) - 1]
 
         response = ""
 
@@ -32,7 +32,7 @@ def ussd(request):
                 response += "CON Karibu {0}: {1} {2} \n1. Endelea".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name,)
-            elif get_code >= 1 and text == "{0}*1".format(text_array[0]):
+            elif get_code >= 1 and user_response == 1:
                 response = "END umechagua moja {0}".format(text_array[0])
             # else:
             #     response = "END umechagua moja {0}".format(text)
