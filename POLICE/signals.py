@@ -109,6 +109,10 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
         get_case = Case.objects.get(id=instance.id)
         get_case.rb = get_rb_string
         save_case = get_case.save()
+        import datetime
+
+        get_date = datetime.date.today()
+        add_record_to_chart = Chart.objects.create(complaint=instance.complainant, crime=instance.crime,start_date=get_date)
 
         URL = 'https://apisms.beem.africa/v1/send'
         api_key = '2799f1a807695012'
@@ -185,7 +189,6 @@ def send_investigation_alert(sender, instance, created, **kwargs):
 
         '''Get amount invested and daily amount earning'''
 
-
         '''Get phone detail and convert and user id as recipient_id on api'''
         # number= "255755422199"
         phone = str(instance.case_investigator.case.complainant.user.phone)
@@ -197,8 +200,8 @@ def send_investigation_alert(sender, instance, created, **kwargs):
         user_id = instance.case_investigator.case.complainant.user.id
 
         message_body = f"Habari,Ndugu Namba: {code}, \nJarada namba:\n {get_rb}" \
-                       f"\nLimefanyiwa maboresho, tafadhali ingia kwenye tovuti kwa taarifa zaidi\n"\
-                                   f"https://crms-police.herokuapp.com/"
+                       f"\nLimefanyiwa maboresho, tafadhali ingia kwenye tovuti kwa taarifa zaidi\n" \
+                       f"https://crms-police.herokuapp.com/"
 
         print(message_body)
         first_request = requests.post(url=URL, data=json.dumps({
@@ -228,8 +231,6 @@ def send_investigation_alert(sender, instance, created, **kwargs):
         print(first_request.json())
 
         # return (first_request.json())
-
-
 
 
 #

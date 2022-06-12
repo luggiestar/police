@@ -19,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('username', 'email', 'is_staff', 'title',)
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        ('personal', {'fields': ('first_name', 'middle_name', 'last_name', 'sex', 'phone', 'title', 'residency'),
+        ('personal', {'fields': ('first_name', 'middle_name', 'last_name', 'sex', 'phone', 'title', 'station'),
                       }),
 
         ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active', 'groups',
@@ -67,6 +67,20 @@ class ZoneAdmin(ImportExportModelAdmin):
 
 admin.site.register(Zone, ZoneAdmin)
 
+
+class ChartAdmin(ImportExportModelAdmin):
+    list_display = ('complaint','crime','start_date','finish_date','week_number')
+    search_fields = ['complaint']
+    # list_filter = ['title', 'station']
+
+    # def has_add_permission(self, request):
+    #     return False
+    #
+    # def has_change_permission(self, request, obj=None):
+    #     return False
+
+
+admin.site.register(Chart, ChartAdmin)
 
 class RegionAdmin(ImportExportModelAdmin):
     list_display = ('name', 'zone')

@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+    input[type="search"] {
+        border-color: rgb(109, 109, 109);
+    }
+  .panel-new {
+        padding: 2rem;
+        border: 3px solid #ef4036;
+        border-right-style: none;
+        border-bottom-style: none;
+        border-top-style: none;
+    }
+</style>
+<div id="content-main">
+        <div class="panel panel-new" style=" display: flex; justify-content: space-between">
+            <div>
+        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Criminal Record Gant Chart </b></h3>
+
+
+       </div>
+
+
+    </div>
+
+    <div class="panel panel-body">
+        {% if chart %}
+        {% autoescape off %}
+        {{ plot_div }}
+    {% endautoescape %}}
+        {% else %}
+            <h5> <i class="fa fa-frown-o fa-1x fa-lg text-danger-custom"></i>&nbsp;No record to display</b></h5>
+
+
+        {% enif %}
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

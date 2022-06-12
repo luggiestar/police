@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from ckeditor.fields import RichTextField
+from datetime import datetime, timedelta
 
 from ..models import *
 
@@ -75,3 +76,29 @@ class InvestigationRecord(models.Model):
 
     def __str__(self):
         return "{0}-{1}".format(self.case_investigator, self.status)
+
+
+class Chart(models.Model):
+    complaint = models.ForeignKey('Complainant', on_delete=models.CASCADE, related_name="complaint_tracking"
+                                                                                        "")
+    start_date = models.DateField()
+    crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
+    week_number = models.CharField(max_length=2, blank=True, editable=False)
+    finish_date = models.DateField(null=True, blank=True, editable=False)
+
+    # string representation method
+    def __str__(self):
+        return str(self.complaint)
+
+    # overiding the save method
+    def save(self, *args, **kwargs):
+        print(self.start_date.isocalendar()[1])
+        if self.week_number == "":
+            self.week_number = self.start_date.isocalendar()[1]
+
+            date_obj = datetime.strptime(str(self.start_date), '%Y-%m-%d')
+
+            start_of_week = date_obj - timedelta(days=date_obj.weekday())  # Monday
+            end_of_week = start_of_week + timedelta(days=6)
+            self.finish_date = end_of_week
+        super().save(*args, **kwargs)
