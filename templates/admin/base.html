@@ -450,16 +450,22 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu bg-blue">
 
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser and request.user.is_staff %}
                 <li>
                     <a id="adminIndex" href="{% url 'admin:index' %}">
                         <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
                     </a>
                 </li>
+                {% elif request.user.is_staff  %}
+                 <li>
+                    <a id="adminIndex" href="{% url 'POLICE:chart' %}">
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
+                    </a>
+                </li>
                 {% else %}
                 <li>
                     <a id="adminIndex" href="#">
-                        <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
                     </a>
                 </li>
                 {% endif %}
