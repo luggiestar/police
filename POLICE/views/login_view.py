@@ -18,12 +18,10 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                if request.user.is_superuser:
+                if request.user.is_superuser :
 
                     return redirect("admin:index")
-                elif request.user.is_staff:
 
-                    return redirect("POLICE:chart")
                 else:
                     return redirect('POLICE:my_case_list')
 
