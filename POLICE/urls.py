@@ -6,6 +6,8 @@ from .views import *
 app_name = 'POLICE'
 urlpatterns = [
     # path('', index, name="index"),
+    path('', login_view, name="login"),
+
     path('chart/', chart_view, name="chart"),
 
     path('ussd/', ussd, name="ussd"),
@@ -26,6 +28,6 @@ urlpatterns = [
     path('add-complaint-case-registration/<get_code>', add_complainant_case, name="add_complainant_case"),
     path('save-assigned-investigator/<get_case>', save_assigned_investigator, name="save_assigned_investigator"),
     path('complainant-case-history/<code>', complainant_details, name="complainant_details"),
-    path('', login_view, name="login"),
+
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
