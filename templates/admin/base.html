@@ -521,7 +521,7 @@
                 {% else %}
 
                 {% get_menu request as app_list %}
-                {% if app_list and  request.user.is_superuser %}
+                {% if app_list  %}
                 {% for app in app_list %}
                 {% if not adminlte.show_apps or adminlte.show_apps and not app.app_label or app.app_label in adminlte.show_apps %}
                 {% if not app.app_label or app.app_label != adminlte.main_navigation_app %}
