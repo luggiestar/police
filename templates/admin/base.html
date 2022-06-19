@@ -456,13 +456,20 @@
                         <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
                     </a>
                 </li>
-                {% elif request.user.is_staff  %}
+                {% elif request.user.is_staff and request.user.title|upper == "ADMIN" %}
                  <li>
+                    <a id="adminIndex" href="{% url 'admin:index' %}">
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
+                    </a>
+                </li>
+                {% elif  request.user.is_staff  %}
+                <li>
                     <a id="adminIndex" href="{% url 'POLICE:chart' %}">
                         <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
                     </a>
                 </li>
-                {% else %}
+
+                {% else  %}
                 <li>
                     <a id="adminIndex" href="#">
                         <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
