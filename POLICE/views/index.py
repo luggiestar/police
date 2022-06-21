@@ -80,3 +80,12 @@ def delete_user(request, object_pk):
 
         return redirect('POLICE:staff_list')
 
+
+def change_status(request, object_pk):
+    if request.user.is_staff:
+        instance = User.objects.filter(id=object_pk).first()
+        if instance.is_active:
+            instance.is_active = False
+            instance.save()
+
+            return redirect('POLICE:staff_list')

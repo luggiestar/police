@@ -78,9 +78,9 @@
                         <td>{{user.last_name}}</td>
                         <td>{{user.sex}}</td>
                         <td>{% if user.is_active %}
-                                                    <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;"> <i class="fa fa-toggle-on text-success"></i></a>
+                                                    <a href="{% url 'POLICE:change_status' user.id %}" style="text-decoration:none;"> <i class="fa fa-toggle-on " style="color:green"></i></a>
 {% else %}
-                                                    <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;"><i class="fa fa-toggle-off text-danger"></i></a>
+                                                    <a href="{% url 'POLICE:change_status' user.id %}" style="text-decoration:none;"><i class="fa fa-toggle-off "style="color:red"></i></a>
 {% endif %}
                         </td>
                         <td>{{user.phone}}</td>

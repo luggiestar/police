@@ -16,6 +16,7 @@ urlpatterns = [
     path('staff-list', staff_entry, name="staff_list"),
     path('update-user/<object_pk>', update_staff, name="update_staff"),
     path('delete-user/<object_pk>', delete_user, name="delete_user"),
+    path('change-user-status/<object_pk>', change_status, name="change_status"),
     path('regional-cases', regional_cases, name="regional_cases"),
     path('account-change-password', change_password, name='change_password'),
     path('my-case-list', my_case_list, name="my_case_list"),
