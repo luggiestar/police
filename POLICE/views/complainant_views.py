@@ -30,12 +30,12 @@ def my_case_list(request):
 
 def generate_code(request):
     if request.user.is_staff:
-        try:
-            save_staff_complaint=Complainant.objects.create(user=request.user)
-            if save_staff_complaint:
-                return redirect('POLICE:my_case_list')
-        except:
-            return redirect('POLICE:my_case_list')
+        # try:
+        save_staff_complaint=Complainant.objects.create(user=request.user)
+        # if save_staff_complaint:
+        return redirect('POLICE:my_case_list')
+        # except:
+        #     return redirect('POLICE:my_case_list')
 
 
 

@@ -31,7 +31,7 @@ def change_password(request):
 def staff_entry(request):
     title = "Staff List"
     template = 'police/staff_entry.html'
-    get_staff = User.objects.filter(is_staff=True)
+    get_staff = User.objects.all()
     form = StaffRegistrationForm()
 
     if request.method == "POST":
