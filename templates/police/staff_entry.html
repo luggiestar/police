@@ -63,10 +63,10 @@
                         <th>Sex</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Position</th>
+                        <th>Title</th>
                         <th>Police station</th>
 
-                        <!-- <th>Action</th> -->
+                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,6 +81,7 @@
                         <td>{{user.phone}}</td>
                         <td>{{user.title}}</td>
                         <td>{{user.station}}</td>
+                        <td><a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;"> Delete &nbsp;&nbsp;<i class="fa fa-delete" ></i></a></td>
 
                     </tr>
                     {% endfor %}
