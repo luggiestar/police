@@ -61,7 +61,7 @@
                         <th>Middle Name</th>
                         <th>Last Name</th>
                         <th>Sex</th>
-                        <th>Email</th>
+                        <th>Enable/DisAble</th>
                         <th>Phone</th>
                         <th>Title</th>
                         <th>Police station</th>
@@ -77,11 +77,18 @@
                         <td>{{user.middle_name}}</td>
                         <td>{{user.last_name}}</td>
                         <td>{{user.sex}}</td>
-                        <td>{{user.email}}</td>
+                        <td>{% if user.is_active %}
+                                                    <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;"> <i class="fa fa-toggle-on text-success"></i></a>
+{% else %}
+                                                    <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;"><i class="fa fa-toggle-off text-danger"></i></a>
+{% endif %}
+                        </td>
                         <td>{{user.phone}}</td>
                         <td>{{user.title}}</td>
                         <td>{{user.station}}</td>
-                        <td><a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;" class="btn btn-danger"> Delete &nbsp;&nbsp;<i class="fa fa-trash" ></i></a></td>
+                        <td>
+                            <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;" class="btn btn-danger"> Delete &nbsp;&nbsp;<i class="fa fa-trash" ></i></a>
+                        </td>
 
                     </tr>
                     {% endfor %}
