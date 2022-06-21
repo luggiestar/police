@@ -646,12 +646,31 @@
 
 
                 {% endif %}
+                {% if  request.user.is_staff  %}
+                    <li {% if not app.admin_url %}class="treeview"{% endif %}>
+                        <a href="{% if app.admin_url %}{{app.admin_url}}{% else %}javascript:void(0){% endif %}">
+                            <i class="fas {% if app.icon %} {{app.icon}} {% else %}fa-line-chart{% endif %} text-white"></i>
+                            <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;My Cases</span>
+                            {% if not app.admin_url %}
+                            <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i></span>
+                            {% endif %}
+                        </a>
+                        {% if not app.admin_url %}
+                            <ul class="treeview-menu">
+
+                                    <li><a href="{% url 'POLICE:my_case_list' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>Cases</a></li>
+                                {% endif %}
+                            </ul>
+
+                    </li>
+                {% endif %}
 
             {% if  request.user.title|upper == "ADMIN" %}
                 <li {% if not app.admin_url %}class="treeview"{% endif %}>
                     <a href="{% if app.admin_url %}{{app.admin_url}}{% else %}javascript:void(0){% endif %}">
                         <i class="fas {% if app.icon %} {{app.icon}} {% else %}fa-users{% endif %} text-white"></i>
-                        <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;Staff management</span>
+                        <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;User management</span>
                         {% if not app.admin_url %}
                         <span class="pull-right-container">
                                   <i class="fa fa-angle-left pull-right"></i></span>

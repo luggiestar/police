@@ -11,9 +11,14 @@ User = get_user_model()
 def my_case_list(request):
     title = "Investigations List"
     template = 'complainant/my_cases_list.html'
-    get_complaint = get_object_or_404(Complainant, user=request.user)
-    cases = Case.objects.filter(complainant=get_complaint)
-    total = Case.objects.filter(complainant=get_complaint).count()
+    try:
+
+        get_complaint = get_object_or_404(Complainant, user=request.user)
+        cases = Case.objects.filter(complainant=get_complaint)
+        total = Case.objects.filter(complainant=get_complaint).count()
+    except:
+        cases=None
+        total=None
 
     context = {
         'title': title,
