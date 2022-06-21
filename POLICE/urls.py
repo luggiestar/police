@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('ussd/', ussd, name="ussd"),
     path('case-list', case_list, name="case_list"),
+    path('assign-staff-complaint', generate_code, name="generate_code"),
     path('staff-list', staff_entry, name="staff_list"),
     path('update-user/<object_pk>', update_staff, name="update_staff"),
     path('regional-cases', regional_cases, name="regional_cases"),
