@@ -88,4 +88,8 @@ def change_status(request, object_pk):
             instance.is_active = False
             instance.save()
 
-            return redirect('POLICE:staff_list')
+        else:
+            instance.is_active = True
+            instance.save()
+
+        return redirect('POLICE:staff_list')
