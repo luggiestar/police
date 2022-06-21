@@ -71,3 +71,12 @@ def update_staff(request, object_pk):
         form = StaffRegistrationForm(instance=instance)
     context_dict = {'form': form, 'instance': instance}
     return render(request, 'police/update_user.html', context_dict)
+
+
+def delete_user(request, object_pk):
+    if request.user.is_staff:
+        instance = User.objects.filter(id=object_pk).first()
+        instance.delete()
+
+        return redirect('POLICE:staff_list')
+
