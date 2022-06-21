@@ -19,11 +19,13 @@ def my_case_list(request):
     except:
         cases = None
         total = None
+        get_complaint =None
 
     context = {
         'title': title,
         'total': total,
         'cases': cases,
+        'complaint': get_complaint,
     }
     return render(request, template, context)
 
