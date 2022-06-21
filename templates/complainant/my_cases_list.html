@@ -24,7 +24,12 @@
     {% if complaint %}
         <div class="panel panel-new" style=" display: flex; justify-content: space-between">
             <div>
-        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;My Case &nbsp;<b>({{total}})</b></h3>
+        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;My Case &nbsp;<b>({{total}})</b>
+        </h3>
+                <br>
+                  <h5> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Your Complaint Code is &nbsp;<b>{{complaint.code}}</b>
+        </h5>
+
 
 
        </div>
