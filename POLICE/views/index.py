@@ -28,9 +28,9 @@ def change_password(request):
     })
 
 
-def staff_entry(request):
-    title = "Staff List"
-    template = 'police/staff_entry.html'
+def user_management(request):
+    title = "User List"
+    template = 'police/user_management.html'
     get_staff = User.objects.all().order_by('-id')
     form = StaffRegistrationForm()
 
@@ -47,7 +47,7 @@ def staff_entry(request):
             save_form.save()
             messages.success(request, f'{get_pas} created successfully!')
 
-            return redirect('POLICE:staff_list')
+            return redirect('POLICE:user_management')
 
     context = {
         'title': title,

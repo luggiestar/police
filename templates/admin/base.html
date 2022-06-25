@@ -407,11 +407,11 @@
                             <li class="user-footer">
                                 {% if request.user.is_staff %}
                                 <div class="pull-left">
-                                    <a  href="#" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Person Profile' %}</a>
+                                    <a  href="POLICE:change_password" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Change Password' %}</a>
                                 </div>
                                 {% else %}
                                 <div class="pull-left">
-                                    <a  href="#" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Person Profile' %}</a>
+                                    <a  href="POLICE:change_password" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Change Password' %}</a>
                                 </div>
                                 {% endif %}
                                 <div class="pull-right">
@@ -677,7 +677,7 @@
                         {% endif %}
                     </a>
                      <ul class="treeview-menu">
-                        <li><a href="{% url 'POLICE:staff_list' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>Staff List</a></li>
+                        <li><a href="{% url 'POLICE:user_management' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>User List</a></li>
                     </ul>
                 </li>
             {% endif %}
