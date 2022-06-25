@@ -46,11 +46,11 @@ def ussd(request):
                                                                                       get_complaint.user.last_name)
 
 
-        if text == "{0}*1".format(code):
-            response = "END umechagua moja "
-            # else:
-            #     response = "END umechagua moja {0}".format(text)
-
+        # if text == "{0}*1".format(code):
+        #     response = "END umechagua moja "
+        #     # else:
+        #     #     response = "END umechagua moja {0}".format(text)
+        #
 
 
         else:
