@@ -35,23 +35,23 @@ def ussd(request):
 
                 code = get_complaint.code
                 get_case = Case.objects.filetr(complainant__code=code).order_by('-id').first()
-                if get_complaint:
+                get_count = Case.objects.filetr(complainant__code=code).order_by('-id').count()
+                if get_count > 0:
 
-                    response = "END Karibu {0}: {1} {2} \nMajarada yako ni\n1. {3}  ".format(get_complaint.code,
-                                                                           get_complaint.user.first_name,
-                                                                           get_complaint.user.last_name,get_case.rb)
+                    response = "END Karibu {0}: {1} {2} \njarada lako ni\n1. {3}  ".format(get_complaint.code,
+                                                                                           get_complaint.user.first_name,
+                                                                                           get_complaint.user.last_name,
+                                                                                           get_case.rb)
                 else:
                     response = "END Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
-                                                                                      get_complaint.user.first_name,
-                                                                                      get_complaint.user.last_name)
+                                                                                         get_complaint.user.first_name,
+                                                                                         get_complaint.user.last_name)
 
 
         # if text == "{0}*1".format(code):
         #     response = "END umechagua moja "
         #     # else:
         #     #     response = "END umechagua moja {0}".format(text)
-
-
 
         else:
 
