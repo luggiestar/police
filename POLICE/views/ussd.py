@@ -31,7 +31,7 @@ def ussd(request):
             get_number=get_code
             if get_number == 1:
                 get_complaint = Complainant.objects.filter(code=text).first()
-                get_case=Case.objects.filter(complainant=get_complaint);
+                get_case=Case.objects.filter(complainant=get_complaint).first()
                 code = get_complaint.code
 
                 response += "CON Karibu {0}: {1} {2} \n majarada yako ni\n1. {3} ".format(get_complaint.code,
