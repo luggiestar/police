@@ -27,7 +27,11 @@
 
 
        </div>
+  <div>
+        <h3> <i class="fa fa-home fa-1x fa-lg text-danger-custom"></i>&nbsp;Region: &nbsp;<b>{{request.user.residency.region.name}}</b></h3>
 
+
+       </div>
 
     </div>
 
@@ -44,6 +48,7 @@
                     <th>Sex</th>
                     <th>Contact</th>
                     <th>Residency</th>
+                    <th>police station</th>
                     <th>Case</th>
                     <th>Date</th>
                     <th>Action</th>
@@ -60,7 +65,8 @@
                     <td>{{case.complainant.user.first_name}} {{case.complainant.user.last_name}} </td>
                      <td>{{case.complainant.user.sex}}</td>
                        <td>{{case.complainant.user.phone}}</td>
-                     <td>{{case.complainant.user.residency}}</td>
+                     <td>{{case.complainant.user.residency.name}}</td>
+                     <td>{{case.registerer.station}}</td>
                      <td>
 							<a class=" mu-color pb-2" href="#"  data-toggle="modal" data-target="#{{forloop.counter}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
 

@@ -11,8 +11,8 @@ User = get_user_model()
 def new_case_list(request):
     title = "Case List"
     template = 'senior_officer/new_case_list.html'
-    cases = Case.objects.all().exclude(id__in=CaseInvestigator.objects.all().values("case__id"))
-    total = Case.objects.all().exclude(id__in=CaseInvestigator.objects.all().values("case__id")).count()
+    cases = Case.objects.filter(registerer__station__district__region=request.user.station.district.region).exclude(id__in=CaseInvestigator.objects.all().values("case__id"))
+    total = Case.objects.filter(registerer__station__district__region=request.user.station.district.region).exclude(id__in=CaseInvestigator.objects.all().values("case__id")).count()
     form = AssignInvestigatorForm()
 
     context = {
