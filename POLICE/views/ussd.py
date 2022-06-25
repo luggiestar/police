@@ -34,7 +34,7 @@ def ussd(request):
                 get_complaint = Complainant.objects.filter(code=text).first()
 
                 code = get_complaint.code
-                get_case = Case.objects.filetr(complaint__code=code).order_by('-id').first()
+                get_case = Case.objects.filetr(complainant__code=code).order_by('-id').first()
                 if get_case:
 
                     response += "CON Karibu {0}: {1} {2} \nMajarada yako ni\n1. {3}  ".format(get_complaint.code,
@@ -46,11 +46,11 @@ def ussd(request):
                                                                                       get_complaint.user.last_name)
 
 
-        # if text == "{0}*1".format(code):
-        #     response = "END umechagua moja "
-        #     # else:
-        #     #     response = "END umechagua moja {0}".format(text)
-        #
+        if text == "{0}*1".format(code):
+            response = "END umechagua moja "
+            # else:
+            #     response = "END umechagua moja {0}".format(text)
+
 
 
         else:
