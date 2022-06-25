@@ -28,7 +28,7 @@ def ussd(request):
         elif text:
 
             get_code = Complainant.objects.filter(code=text).count()
-            get_complaint = Complainant.objects.filter(code=text).first()
+            # get_complaint2 = Complainant.objects.filter(code=text).first()
             get_number=get_code
             if get_number == 1:
                 get_complaint = Complainant.objects.filter(code=text).first()
@@ -39,8 +39,8 @@ def ussd(request):
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name,get_case.rb)
 
-            if get_number == 1 and text == "{0}*1".format(get_complaint.code):
-                response = "END umechagua moja {0}".format(get_complaint.code)
+            # if get_number == 1 and text == "{0}*1".format(get_complaint2.code):
+            #     response = "END umechagua moja {0}".format(get_complaint2.code)
                 # else:
                 #     response = "END umechagua moja {0}".format(text)
 
