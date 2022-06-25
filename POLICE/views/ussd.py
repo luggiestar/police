@@ -17,7 +17,7 @@ def ussd(request):
         text_array = text.split("*")
         user_response = text_array[len(text_array) - 1]
         # level = count(text_array)
-        global code
+        # global code
 
         response = ""
 
@@ -46,10 +46,10 @@ def ussd(request):
                                                                                       get_complaint.user.last_name)
 
 
-        if text == "{0}*1".format(code):
-            response = "END umechagua moja "
-            # else:
-            #     response = "END umechagua moja {0}".format(text)
+        # if text == "{0}*1".format(code):
+        #     response = "END umechagua moja "
+        #     # else:
+        #     #     response = "END umechagua moja {0}".format(text)
 
 
 
