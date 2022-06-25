@@ -28,21 +28,19 @@ def ussd(request):
         elif text:
 
             get_code = Complainant.objects.filter(code=text).count()
+            get_complaint = Complainant.objects.filter(code=text).first()
             get_number=get_code
             if get_number == 1:
-
                 get_complaint = Complainant.objects.filter(code=text).first()
-                get_case=Case.objects.filter(complainant=get_complaint)
+                get_case=Case.objects.filter(complainant=get_complaint).order_by('-id').first()
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: {1} {2} \n Majarada yako  ni\n1.".format(get_complaint.code,
+                response += "CON Karibu {0}: {1} {2} \n Jarada lako  ni\n1. {3} ".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
-                                                                                get_complaint.user.last_name)
-                for i in get_case:
-                    response += "CON {0}".format(i.rb)
+                                                                                get_complaint.user.last_name,get_case.rb)
 
-            if get_number == 1 and text == "{0}*1".format(get_number):
-                response = "END umechagua moja {0}".format(get_number)
+            if get_number == 1 and text == "{0}*1".format(get_complaint.code):
+                response = "END umechagua moja {0}".format(get_complaint.code)
                 # else:
                 #     response = "END umechagua moja {0}".format(text)
 
@@ -50,5 +48,5 @@ def ussd(request):
 
             else:
 
-                response = "END Namba si sahihi"
+                response = "END Terminated"
         return HttpResponse(response)
