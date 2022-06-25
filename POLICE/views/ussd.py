@@ -35,7 +35,7 @@ def ussd(request):
                 get_case=Case.objects.filter(complainant=get_complaint)
                 code = get_complaint.code
 
-                response = "CON Karibu {0}: {1} {2} \n Majarada yako  ni\n1.".format(get_complaint.code,
+                response += "CON Karibu {0}: {1} {2} \n Majarada yako  ni\n1.".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name)
                 for i in get_case:
@@ -50,5 +50,5 @@ def ussd(request):
 
             else:
 
-                response = "END Terminated"
+                response = "END Namba si sahihi"
         return HttpResponse(response)
