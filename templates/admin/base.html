@@ -315,7 +315,7 @@
                     {{ adminlte_site_header.site_header }}
                     {% else %}
 
-                       <p>CRMS</p>
+                       <p>CCRMS</p>
 
                     {% endif %}
                 </b>
@@ -405,15 +405,7 @@
                             </li>
                             {% endif %}
                             <li class="user-footer">
-                                {% if request.user.is_staff %}
-                                <div class="pull-left">
-                                    <a  href="POLICE:change_password" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Change Password' %}</a>
-                                </div>
-                                {% else %}
-                                <div class="pull-left">
-                                    <a  href="POLICE:change_password" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Change Password' %}</a>
-                                </div>
-                                {% endif %}
+
                                 <div class="pull-right">
                                     <a href="{% url 'POLICE:logout' %}" class="btn mu-bg-orange btn-flat">{% trans 'Logout' %}</a>
                                 </div>
@@ -753,7 +745,7 @@
         <div class="pull-right hidden-xs">
             <b>Crime and Criminal Record Management System</b>
         </div>
-        <strong>CRMS &copy; {% now 'Y' %} </strong> All rights reserved.
+        <strong>CCRMS &copy; {% now 'Y' %} </strong> All rights reserved.
     </footer>
 
     <!-- Add the sidebar's background. This div must be placed
