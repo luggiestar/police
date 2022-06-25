@@ -36,24 +36,24 @@ def ussd(request):
                     case1 = Case.objects.filter(complainant=get_complaint).order_by('-id')[0]
                     c1 = case1.rb
                 except:
-                    c1 = None
+                    c1 = ""
                 try:
                     case2 = Case.objects.filter(complainant=get_complaint).order_by('-id')[1]
                     c2 = case2.rb
                 except:
-                    c2 = None
+                    c2 = ""
                 try:
 
                     case3 = Case.objects.filter(complainant=get_complaint).order_by('-id')[2]
                     c3 = case3.rb
                 except:
-                    c3 = None
+                    c3 = ""
                 try:
 
                     case4 = Case.objects.filter(complainant=get_complaint).order_by('-id')[3]
                     c4 = case4.rb
                 except:
-                    c4 = None
+                    c4 = ""
 
                 response = "END Karibu {0}: {1} {2} \n Majarada yako  ni\n{3}\n{4}\n{5}\n{6} ".format(get_complaint.code,
                                                                                        get_complaint.user.first_name,
