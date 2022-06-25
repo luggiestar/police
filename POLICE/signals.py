@@ -140,7 +140,7 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
 
         message_body = f"Habari,Ndugu Namba: {full_name}, \nJarada lako limefunguliwa kikamilifu kwa RB:\n {get_rb_string}" \
                        f"\nWaweza Bofya *384*654444# kufuatilia mwenendo wa " \
-                       f"Jarida\nAu ingia kwenye tovuti Kwa taarifa zaidi \n https://crms-police.herokuapp.com/"
+                       f"jarada\nAu ingia kwenye tovuti Kwa taarifa zaidi \n https://crms-police.herokuapp.com/"
 
         first_request = requests.post(url=URL, data=json.dumps({
             'source_addr': source_addr,

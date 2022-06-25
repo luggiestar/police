@@ -34,18 +34,18 @@ def ussd(request):
                 get_complaint = Complainant.objects.filter(code=text).first()
 
                 code = get_complaint.code
-                get_case = Case.objects.filetr(complainant__code=code).order_by('-id').first()
-                get_count = Case.objects.filetr(complainant__code=code).order_by('-id').count()
+                get_case = Case.objects.filetr(complainant=get_complaint).order_by('-id').first()
+                get_count = Case.objects.filetr(complainant=get_complaint).order_by('-id').count()
                 if get_count > 0:
 
-                    response = "END Karibu {0}: {1} {2} \njarada lako ni\n1. {3}  ".format(get_complaint.code,
+                    response = "END Karibu {0}: {1} {2} \njarada lako ni\n1.  ".format(get_complaint.code,
                                                                                            get_complaint.user.first_name,
                                                                                            get_complaint.user.last_name,
-                                                                                           get_case.rb)
-                else:
-                    response = "END Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
-                                                                                         get_complaint.user.first_name,
-                                                                                         get_complaint.user.last_name)
+                                                                                          )
+                # else:
+                #     response = "END Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
+                #                                                                          get_complaint.user.first_name,
+                #                                                                          get_complaint.user.last_name)
 
 
         # if text == "{0}*1".format(code):
