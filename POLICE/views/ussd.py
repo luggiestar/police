@@ -35,13 +35,13 @@ def ussd(request):
 
                 code = get_complaint.code
                 get_case = Case.objects.filetr(complainant__code=code).order_by('-id').first()
-                if get_case:
+                if get_complaint:
 
-                    response += "CON Karibu {0}: {1} {2} \nMajarada yako ni\n1. {3}  ".format(get_complaint.code,
+                    response = "END Karibu {0}: {1} {2} \nMajarada yako ni\n1. {3}  ".format(get_complaint.code,
                                                                            get_complaint.user.first_name,
                                                                            get_complaint.user.last_name,get_case.rb)
                 else:
-                    response += "CON Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
+                    response = "END Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
                                                                                       get_complaint.user.first_name,
                                                                                       get_complaint.user.last_name)
 
