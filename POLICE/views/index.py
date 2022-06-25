@@ -66,7 +66,7 @@ def update_staff(request, object_pk):
         form = StaffRegistrationForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('POLICE:staff_list')
+            return redirect('POLICE:user_management')
     else:
         form = StaffRegistrationForm(instance=instance)
     context_dict = {'form': form, 'instance': instance}
@@ -78,7 +78,7 @@ def delete_user(request, object_pk):
         instance = User.objects.filter(id=object_pk).first()
         instance.delete()
 
-        return redirect('POLICE:staff_list')
+        return redirect('POLICE:user_management')
 
 
 def change_status(request, object_pk):
