@@ -48,5 +48,5 @@ def ussd(request):
 
             else:
 
-                response = "END Terminated"
+                response = "END Terminated2"
         return HttpResponse(response)
