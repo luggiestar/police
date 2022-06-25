@@ -34,12 +34,12 @@ def ussd(request):
                 get_case=Case.objects.filter(complainant=get_complaint).first()
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: {1} {2} \n majarada yako ni\n1. {3} ".format(get_complaint.code,
+                response += "CON Karibu {0}: {1} {2} \n Jarada lako  ni\n1. {3} ".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
                                                                                 get_complaint.user.last_name,get_case.rb)
 
-                if get_number == 1 and text == "{0}*1".format(code):
-                    response = "END umechagua moja {0}".format(get_number)
+            if get_number == 1 and text == "{0}*1".format(get_number):
+                response = "END umechagua moja {0}".format(get_number)
                 # else:
                 #     response = "END umechagua moja {0}".format(text)
 
@@ -47,5 +47,5 @@ def ussd(request):
 
             else:
 
-                response = "END Namba si sahihi, Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "END Terminated"
         return HttpResponse(response)
