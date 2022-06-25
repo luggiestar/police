@@ -17,7 +17,6 @@ def ussd(request):
         text_array = text.split("*")
         user_response = text_array[len(text_array) - 1]
         # level = count(text_array)
-        # global code
 
         response = ""
 
@@ -29,31 +28,24 @@ def ussd(request):
         elif text:
 
             get_code = Complainant.objects.filter(code=text).count()
-            get_number = get_code
+            get_number=get_code
             if get_number == 1:
                 get_complaint = Complainant.objects.filter(code=text).first()
-
+                get_case=Case.objects.filter(complainant=get_complaint);
                 code = get_complaint.code
-                get_case = Case.objects.filetr(complainant=get_complaint).order_by('-id').first()
-                get_count = Case.objects.filetr(complainant=get_complaint).order_by('-id').count()
-                if get_count > 0:
 
-                    response = "END Karibu {0}: {1} {2} \njarada lako ni\n1.  ".format(get_complaint.code,
-                                                                                           get_complaint.user.first_name,
-                                                                                           get_complaint.user.last_name,
-                                                                                          )
+                response += "CON Karibu {0}: {1} {2} \n majarada yako ni\n1. {3} ".format(get_complaint.code,
+                                                                                get_complaint.user.first_name,
+                                                                                get_complaint.user.last_name,get_case.rb)
+
+                if get_number == 1 and text == "{0}*1".format(code):
+                    response = "END umechagua moja {0}".format(get_number)
                 # else:
-                #     response = "END Karibu {0}: {1} {2} \nHauna Jarada kwa sasa ".format(get_complaint.code,
-                #                                                                          get_complaint.user.first_name,
-                #                                                                          get_complaint.user.last_name)
+                #     response = "END umechagua moja {0}".format(text)
 
 
-        # if text == "{0}*1".format(code):
-        #     response = "END umechagua moja "
-        #     # else:
-        #     #     response = "END umechagua moja {0}".format(text)
 
-        else:
+            else:
 
-            response = "END Namba si sahihi, Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "END Namba si sahihi, Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
         return HttpResponse(response)
