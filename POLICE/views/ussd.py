@@ -30,13 +30,16 @@ def ussd(request):
             get_code = Complainant.objects.filter(code=text).count()
             get_number=get_code
             if get_number == 1:
+
                 get_complaint = Complainant.objects.filter(code=text).first()
-                get_case=Case.objects.filter(complainant=get_complaint).first()
+                get_case=Case.objects.filter(complainant=get_complaint)
                 code = get_complaint.code
 
-                response += "CON Karibu {0}: {1} {2} \n Jarada lako  ni\n1. {3} ".format(get_complaint.code,
+                response = "CON Karibu {0}: {1} {2} \n Majarada yako  ni\n1.".format(get_complaint.code,
                                                                                 get_complaint.user.first_name,
-                                                                                get_complaint.user.last_name,get_case.rb)
+                                                                                get_complaint.user.last_name)
+                for i in get_case:
+                    response += "CON {0}".format(i.rb)
 
             if get_number == 1 and text == "{0}*1".format(get_number):
                 response = "END umechagua moja {0}".format(get_number)
