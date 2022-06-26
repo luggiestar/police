@@ -21,9 +21,15 @@
     }
 </style>
 <div id="content-main">
+    {% if complaint %}
         <div class="panel panel-new" style=" display: flex; justify-content: space-between">
             <div>
-        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;My Case &nbsp;<b>({{total}})</b></h3>
+        <h3> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;My Case &nbsp;<b>({{total}})</b>
+        </h3>
+                <br>
+                  <h5> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Your Complaint Code is &nbsp;<b>{{complaint.code}}</b>
+        </h5>
+
 
 
        </div>
@@ -122,5 +128,21 @@
             </tbody>
         </table>
     </div>
+    {% elif request.user.is_staff %}
+     <div class="panel panel-new" style=" display: flex; justify-content: space-between">
+            <div>
+        <h5> <i class="fa fa-info-circle fa-1x fa-lg text-danger-custom"></i>&nbsp;Register yourself as Complaint here &nbsp;<a class="btn btn-primary  text-white" href="{% url 'POLICE:generate_code' %}"  >
+                    Register &nbsp;
+                </a> <br>
+        after registration, you will be eligible for case registration at police registerer office
+        </h5>
+
+
+       </div>
+
+
+    </div>
+     {% endif %}
+
 </div>
 {% endblock %}

@@ -110,6 +110,19 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'crime',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             # 'sql_mode':'traditional'
+#         }
+#     }
+# }
 # create user lightness with encrypted password '1234';
 # grant all privileges on database police to lightness;
 

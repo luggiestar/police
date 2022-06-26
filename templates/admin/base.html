@@ -315,7 +315,7 @@
                     {{ adminlte_site_header.site_header }}
                     {% else %}
 
-                       <p>CRMS</p>
+                       <p>CCRMS</p>
 
                     {% endif %}
                 </b>
@@ -405,15 +405,7 @@
                             </li>
                             {% endif %}
                             <li class="user-footer">
-                                {% if request.user.is_staff %}
-                                <div class="pull-left">
-                                    <a  href="#" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Person Profile' %}</a>
-                                </div>
-                                {% else %}
-                                <div class="pull-left">
-                                    <a  href="#" class="btn bg-blue btn-flat"><i class="fa fa-user"> </i> {% trans 'Person Profile' %}</a>
-                                </div>
-                                {% endif %}
+
                                 <div class="pull-right">
                                     <a href="{% url 'POLICE:logout' %}" class="btn mu-bg-orange btn-flat">{% trans 'Logout' %}</a>
                                 </div>
@@ -450,16 +442,29 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu bg-blue">
 
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser and request.user.is_staff %}
                 <li>
                     <a id="adminIndex" href="{% url 'admin:index' %}">
                         <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
                     </a>
                 </li>
-                {% else %}
+                {% elif request.user.is_staff and request.user.title|upper == "ADMIN" %}
+                 <li>
+                    <a id="adminIndex" href="{% url 'admin:index' %}">
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
+                    </a>
+                </li>
+                {% elif  request.user.is_staff  %}
+                <li>
+                    <a id="adminIndex" href="{% url 'POLICE:chart' %}">
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
+                    </a>
+                </li>
+
+                {% else  %}
                 <li>
                     <a id="adminIndex" href="#">
-                        <i class="fa fa-dashboard"></i> <span>{% trans 'Dashboard' %}</span>
+                        <i class="fa fa-dashboard"></i> <span>{% trans 'Home' %}</span>
                     </a>
                 </li>
                 {% endif %}
@@ -508,7 +513,7 @@
                 {% else %}
 
                 {% get_menu request as app_list %}
-                {% if app_list and  request.user.is_superuser %}
+                {% if app_list  %}
                 {% for app in app_list %}
                 {% if not adminlte.show_apps or adminlte.show_apps and not app.app_label or app.app_label in adminlte.show_apps %}
                 {% if not app.app_label or app.app_label != adminlte.main_navigation_app %}
@@ -633,19 +638,38 @@
 
 
                 {% endif %}
+                {% if  request.user.is_staff  %}
+                    <li {% if not app.admin_url %}class="treeview"{% endif %}>
+                        <a href="{% if app.admin_url %}{{app.admin_url}}{% else %}javascript:void(0){% endif %}">
+                            <i class="fas {% if app.icon %} {{app.icon}} {% else %}fa-line-chart{% endif %} text-white"></i>
+                            <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;My Cases</span>
+                            {% if not app.admin_url %}
+                            <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i></span>
+                            {% endif %}
+                        </a>
+                        {% if not app.admin_url %}
+                            <ul class="treeview-menu">
+
+                                    <li><a href="{% url 'POLICE:my_case_list' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>Cases</a></li>
+                                {% endif %}
+                            </ul>
+
+                    </li>
+                {% endif %}
 
             {% if  request.user.title|upper == "ADMIN" %}
                 <li {% if not app.admin_url %}class="treeview"{% endif %}>
                     <a href="{% if app.admin_url %}{{app.admin_url}}{% else %}javascript:void(0){% endif %}">
                         <i class="fas {% if app.icon %} {{app.icon}} {% else %}fa-users{% endif %} text-white"></i>
-                        <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;Staff management</span>
+                        <span style="overflow: hidden; display: inline-block; vertical-align:top;"> &nbsp;&nbsp;User management</span>
                         {% if not app.admin_url %}
                         <span class="pull-right-container">
                                   <i class="fa fa-angle-left pull-right"></i></span>
                         {% endif %}
                     </a>
                      <ul class="treeview-menu">
-                        <li><a href="{% url 'POLICE:staff_list' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>Staff List</a></li>
+                        <li><a href="{% url 'POLICE:user_management' %}" ><i class="fa {% if model.icon %} {{model.icon}} {% else %}{% endif %}"></i>User List</a></li>
                     </ul>
                 </li>
             {% endif %}
@@ -721,7 +745,7 @@
         <div class="pull-right hidden-xs">
             <b>Crime and Criminal Record Management System</b>
         </div>
-        <strong>CRMS &copy; {% now 'Y' %} </strong> All rights reserved.
+        <strong>CCRMS &copy; {% now 'Y' %} </strong> All rights reserved.
     </footer>
 
     <!-- Add the sidebar's background. This div must be placed

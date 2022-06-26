@@ -44,7 +44,7 @@ class EntryForm(ModelForm):
 class StaffRegistrationForm(ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'middle_name', 'last_name', 'title', 'sex', 'phone', 'station')
+        fields = ('first_name', 'middle_name', 'last_name', 'title', 'sex', 'phone','residency', 'station')
 
 
 class AssignInvestigatorForm(ModelForm):

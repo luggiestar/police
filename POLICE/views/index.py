@@ -28,10 +28,10 @@ def change_password(request):
     })
 
 
-def staff_entry(request):
-    title = "Staff List"
-    template = 'police/staff_entry.html'
-    get_staff = User.objects.filter(is_staff=True)
+def user_management(request):
+    title = "User List"
+    template = 'police/user_management.html'
+    get_staff = User.objects.all().order_by('-id')
     form = StaffRegistrationForm()
 
     if request.method == "POST":
@@ -47,7 +47,7 @@ def staff_entry(request):
             save_form.save()
             messages.success(request, f'{get_pas} created successfully!')
 
-            return redirect('POLICE:staff_list')
+            return redirect('POLICE:user_management')
 
     context = {
         'title': title,
@@ -66,8 +66,30 @@ def update_staff(request, object_pk):
         form = StaffRegistrationForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('POLICE:staff_list')
+            return redirect('POLICE:user_management')
     else:
         form = StaffRegistrationForm(instance=instance)
     context_dict = {'form': form, 'instance': instance}
     return render(request, 'police/update_user.html', context_dict)
+
+
+def delete_user(request, object_pk):
+    if request.user.is_staff:
+        instance = User.objects.filter(id=object_pk).first()
+        instance.delete()
+
+        return redirect('POLICE:user_management')
+
+
+def change_status(request, object_pk):
+    if request.user.is_staff:
+        instance = User.objects.filter(id=object_pk).first()
+        if instance.is_active:
+            instance.is_active = False
+            instance.save()
+
+        else:
+            instance.is_active = True
+            instance.save()
+
+        return redirect('POLICE:staff_list')

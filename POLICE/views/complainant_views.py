@@ -11,16 +11,36 @@ User = get_user_model()
 def my_case_list(request):
     title = "Investigations List"
     template = 'complainant/my_cases_list.html'
-    get_complaint = get_object_or_404(Complainant, user=request.user)
-    cases = Case.objects.filter(complainant=get_complaint)
-    total = Case.objects.filter(complainant=get_complaint).count()
+    try:
+
+        get_complaint = get_object_or_404(Complainant, user=request.user)
+        cases = Case.objects.filter(complainant=get_complaint)
+        total = Case.objects.filter(complainant=get_complaint).count()
+    except:
+        cases = None
+        total = None
+        get_complaint =None
 
     context = {
         'title': title,
         'total': total,
         'cases': cases,
+        'complaint': get_complaint,
     }
     return render(request, template, context)
+
+
+def generate_code(request):
+    if request.user.is_staff:
+        # try:
+        save_staff_complaint=Complainant.objects.create(user=request.user)
+        # if save_staff_complaint:
+        return redirect('POLICE:my_case_list')
+        # except:
+        #     return redirect('POLICE:my_case_list')
+
+
+
 
 
 # def save_assigned_investigator(request, get_case):
@@ -49,8 +69,8 @@ def my_case_report_list(request, code):
         'title': title,
         'total': total,
         'report': cases,
-        'rb':rb_number,
-        'investigation':get_investigation,
+        'rb': rb_number,
+        'investigation': get_investigation,
     }
     return render(request, template, context)
 

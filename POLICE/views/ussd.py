@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 # Create your views here.
-from ..models import Complainant
+from ..models import Complainant, Case
 
 
 @csrf_exempt
@@ -28,22 +28,44 @@ def ussd(request):
         elif text:
 
             get_code = Complainant.objects.filter(code=text).count()
-            get_number=get_code
+            # get_complaint2 = Complainant.objects.filter(code=text).first()
+            get_number = get_code
             if get_number == 1:
                 get_complaint = Complainant.objects.filter(code=text).first()
-                code = get_complaint.code
+                try:
+                    case1 = Case.objects.filter(complainant=get_complaint).order_by('-id')[0]
+                    c1 = case1.rb
+                except:
+                    c1 = ""
+                try:
+                    case2 = Case.objects.filter(complainant=get_complaint).order_by('-id')[1]
+                    c2 = case2.rb
+                except:
+                    c2 = ""
+                try:
 
-                response += "CON Karibu {0}: {1} {2} \n1. Endelea ".format(get_complaint.code,
-                                                                                get_complaint.user.first_name,
-                                                                                get_complaint.user.last_name)
-                if get_number == 1 and text == "{0}*1".format(code):
-                    response = "END umechagua moja {0}".format(get_number)
-                # else:
-                #     response = "END umechagua moja {0}".format(text)
+                    case3 = Case.objects.filter(complainant=get_complaint).order_by('-id')[2]
+                    c3 = case3.rb
+                except:
+                    c3 = ""
+                try:
 
+                    case4 = Case.objects.filter(complainant=get_complaint).order_by('-id')[3]
+                    c4 = case4.rb
+                except:
+                    c4 = ""
 
+                response = "END Karibu {0}: {1} {2} \n Majarada yako  ni\n{3}\n{4}\n{5}\n{6} ".format(get_complaint.code,
+                                                                                       get_complaint.user.first_name,
+                                                                                       get_complaint.user.last_name, c1,
+                                                                                       c2, c3, c4)
+
+            # if get_number == 1 and text == "{0}*1".format(get_complaint2.code):
+            #     response = "END umechagua moja {0}".format(get_complaint2.code)
+            # else:
+            #     response = "END umechagua moja {0}".format(text)
 
             else:
 
-                response = "END Namba si sahihi, Tafadhali fika kituo chochote cha polisi kwa msaada zaidi"
+                response = "END Terminated2"
         return HttpResponse(response)

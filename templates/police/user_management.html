@@ -6,7 +6,7 @@
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 
-{% block content_title %} {% trans 'Staff Entry' %} {% endblock %}
+{% block content_title %} {% trans 'User Management' %} {% endblock %}
 
 {% block content %}
 <style>
@@ -18,11 +18,11 @@
 <div id="content-main">
         <div class="panel panel-new" style="padding:1rem; display: flex; justify-content: space-between">
             <div>
-                <h5> <i class="fa fa-info-circle fa-1x fa-sm"></i>&nbsp;Staff List &nbsp;<b>{{total}}</b></h5>
+                <h5> <i class="fa fa-info-circle fa-1x fa-sm"></i>&nbsp;User List &nbsp;<b>{{total}}</b></h5>
             </div>
             <div>
 				<a class="btn btn-primary  text-white" href="#"  data-toggle="modal" data-target="#newTask2"> 
-                    Add Staff &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+                    Add User &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center text-white"> <b>Staff Registration</b> </h4>
+                        <h4 class="modal-title text-center text-white"> <b>User Registration</b> </h4>
                     </div>
                     <div class="modal-body">
                         <form action="#" method="POST" enctype="multipart/form-data">
@@ -61,12 +61,13 @@
                         <th>Middle Name</th>
                         <th>Last Name</th>
                         <th>Sex</th>
-                        <th>Email</th>
+                        <th>Enable/DisAble</th>
                         <th>Phone</th>
-                        <th>Position</th>
+                        <th>Title</th>
+                        <th>Residency</th>
                         <th>Police station</th>
 
-                        <!-- <th>Action</th> -->
+                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,10 +78,19 @@
                         <td>{{user.middle_name}}</td>
                         <td>{{user.last_name}}</td>
                         <td>{{user.sex}}</td>
-                        <td>{{user.email}}</td>
+                        <td>{% if user.is_active %}
+                                                    <a href="{% url 'POLICE:change_status' user.id %}" style="text-decoration:none;"> <i class="fa fa-toggle-on " style="color:green;font-size:18px"></i></a>
+{% else %}
+                                                    <a href="{% url 'POLICE:change_status' user.id %}" style="text-decoration:none;"><i class="fa fa-toggle-off "style="color:red;font-size:18px"></i></a>
+{% endif %}
+                        </td>
                         <td>{{user.phone}}</td>
                         <td>{{user.title}}</td>
+                        <td>{{user.residency}}</td>
                         <td>{{user.station}}</td>
+                        <td>
+                            <a href="{% url 'POLICE:delete_user' user.id %}" style="text-decoration:none;" class="btn btn-danger"> Delete &nbsp;&nbsp;<i class="fa fa-trash" ></i></a>
+                        </td>
 
                     </tr>
                     {% endfor %}

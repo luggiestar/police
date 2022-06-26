@@ -6,10 +6,17 @@ from .views import *
 app_name = 'POLICE'
 urlpatterns = [
     # path('', index, name="index"),
+    path('', login_view, name="login"),
+
+    path('chart/', chart_view, name="chart"),
+
     path('ussd/', ussd, name="ussd"),
     path('case-list', case_list, name="case_list"),
-    path('staff-list', staff_entry, name="staff_list"),
+    path('assign-staff-complaint', generate_code, name="generate_code"),
+    path('user-management', user_management, name="user_management"),
     path('update-user/<object_pk>', update_staff, name="update_staff"),
+    path('delete-user/<object_pk>', delete_user, name="delete_user"),
+    path('change-user-status/<object_pk>', change_status, name="change_status"),
     path('regional-cases', regional_cases, name="regional_cases"),
     path('account-change-password', change_password, name='change_password'),
     path('my-case-list', my_case_list, name="my_case_list"),
@@ -24,6 +31,6 @@ urlpatterns = [
     path('add-complaint-case-registration/<get_code>', add_complainant_case, name="add_complainant_case"),
     path('save-assigned-investigator/<get_case>', save_assigned_investigator, name="save_assigned_investigator"),
     path('complainant-case-history/<code>', complainant_details, name="complainant_details"),
-    path('', login_view, name="login"),
+
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

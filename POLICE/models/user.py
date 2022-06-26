@@ -92,7 +92,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return "{0}-({1})".format(self.username, self.station)
+        return "{0}-{1}-({2})".format(self.first_name, self.last_name,self.station)
 
 
 def id_generator(size=4, chars=string.digits):

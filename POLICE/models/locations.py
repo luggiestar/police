@@ -34,7 +34,7 @@ class District(models.Model):
         verbose_name_plural = "District"
 
     def __str__(self):
-        return "{0}".format(self.name)
+        return "{0}-{1}".format(self.name, self.region)
 
 
 class Station(models.Model):
@@ -46,4 +46,4 @@ class Station(models.Model):
         verbose_name_plural = "Police Station"
 
     def __str__(self):
-        return "{0}-{1}".format(self.name,self.district)
+        return "{0}-{1}".format(self.name, self.district)
