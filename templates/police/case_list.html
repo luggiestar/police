@@ -63,17 +63,14 @@
         <table id="example" class="table table-striped table-bordered display nowrap" style="width:100%">
             <thead>
                 <tr>
-                   
                     <th>RB</th>
                     <th>Complainant#</th>
                     <th>Names</th>
-
                     <th>Sex</th>
                     <th>Contact</th>
                     <th>Residency</th>
                     <th>Case</th>
                     <th>Date</th>
-                  
                     <!-- <th>Action</th> -->
                 </tr>
             </thead>
@@ -83,48 +80,39 @@
                     <td>{{case.rb}}</td>
                     <td>{{case.complainant.code}}</td>
                     <td>{{case.complainant.user.first_name}} {{case.complainant.user.last_name}} </td>
-                     <td>{{case.complainant.user.sex}}</td>
-                       <td>{{case.complainant.user.phone}}</td>
-                     <td>{{case.complainant.user.residency}}</td>
-                     <td>
-							<a class=" mu-color pb-2" href="#"  data-toggle="modal" data-target="#code{{case.id}}"> <i class="fa fa-eye" aria-hidden="true"></i> {{case.id}}</a>
-
-						</td>
-                     <td>{{case.registered_on}}</td>
-
-
-
-<div id="code{{case.id}}" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-
-								    <!-- Modal content-->
-								    <div class="modal-content">
-										<div class="modal-header bg-primary text-white">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title text-center mu-color"> <b>Case Description</b> </h4>
-										</div>
-										<div class="modal-body">
-                                             <div class="list-group">
-                                                                 <a href="#" class="list-group-item bg-primary text-white" style=" color: white;display: flex; justify-content: space-between"><span>1.0 INFORMATION </span></a>
-<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>RB</span> <span><b>{{case.rb}}</b></span></a>
-<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Complainant</span> <span><b>{{case.complainant.code}}</b></span></a>
-<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Crime</span> <span><b>{{case.crime}}</b></span></a>
- </div>
-                                             <div class="list-group">
-                                                                 <a href="#" class="list-group-item mu-bg mu-color" style=" color: white;display: flex; justify-content: space-between"><span>2.0 DESCRIPTION</span></a>
-
-<a href="#" class="list-group-item text-justify" style=" display: flex;"> <span>{{case.description|safe}}</span></a>
-
- </div>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
-										</div>
+					<td>{{case.complainant.user.sex}}</td>
+					<td>{{case.complainant.user.phone}}</td>
+					<td>{{case.complainant.user.residency}}</td>
+					<td>
+						 <a class="btn-primary pb-2" href="#"  data-toggle="modal" data-target="#code{{case.id}}"> <i class="fa fa-eye" aria-hidden="true"></i></a>
+					</td>
+					<td>{{case.registered_on}}</td>
+					<div id="code{{case.id}}" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header bg-primary text-white">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title text-center mu-color"> <b>Case Description</b> </h4>
+								</div>
+								<div class="modal-body">
+									<div class="list-group">
+										<a href="#" class="list-group-item bg-primary text-white" style=" color: white;display: flex; justify-content: space-between"><span>1.0 INFORMATION </span></a>
+										<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>RB</span> <span><b>{{case.rb}}</b></span></a>
+										<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Complainant</span> <span><b>{{case.complainant.code}}</b></span></a>
+										<a href="#" class="list-group-item text-right" style=" display: flex; justify-content: space-around">  <span>Crime</span> <span><b>{{case.crime}}</b></span></a>
+									</div>
+									<div class="list-group">
+										<a href="#" class="list-group-item mu-bg mu-color" style=" color: white;display: flex; justify-content: space-between"><span>2.0 DESCRIPTION</span></a>
+										<a href="#" class="list-group-item text-justify" style=" display: flex;"> <span>{{case.description|safe}}</span></a>
 									</div>
 								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn mu-bg-oranges" data-dismiss="modal">Close</button>
+								</div>
 							</div>
-
+						</div>
+					</div>
                 {% endfor %}
             </tbody>
         </table>
