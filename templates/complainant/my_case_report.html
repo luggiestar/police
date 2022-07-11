@@ -43,6 +43,7 @@
 
                     <th>date registered</th>
                     <th>Investigator</th>
+                    <th>Investigator Contact</th>
                     <th>date reported</th>
                          <th>Report</th>
                          <th>Status</th>
@@ -59,7 +60,10 @@
 						</td>
 
                       <td>
-{{x.investigator.user.first_name}}&nbsp; {{x.investigator.user.last_name}}
+{{x.case_investigator.investigator.first_name}}&nbsp; {{x.case_investigator.investigator.last_name}}
+						</td>
+                      <td>
+{{x.case_investigator.investigator.phone}}
 						</td>
                      <td>		{{x.report_date}}
 </td>
