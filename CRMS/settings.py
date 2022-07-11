@@ -99,9 +99,9 @@ WSGI_APPLICATION = 'CRMS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'police', 
-        'USER': 'lightness', 
-        'PASSWORD': '1234',
+        'NAME': 'csrms',
+        'USER': 'postgres',
+        'PASSWORD': '',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
         'OPTIONS': {
@@ -197,5 +197,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
