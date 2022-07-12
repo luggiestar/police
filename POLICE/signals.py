@@ -58,8 +58,8 @@ def save_staff(sender, instance, created, raw=False, **kwargs):
 
                     user_id = instance.id
 
-                    message_body = f"Habari,Ndugu {full_name}, \nUmesajiliwa Kikamilifu kwenye Mfumo wa Polisi kama {title}" \
-                                   f"\nWaweza kuingia kwenye Mfumo  kupitia\n" \
+                    message_body = f"Hello, {full_name}, \nyou have been successful registered on the police system as {title}" \
+                                   f"\nyou can access the system via\n" \
                                    f"https://crms-police.herokuapp.com/" \
                                    f"\nUsername:{username},\nPassword:{password} "
 
@@ -112,7 +112,8 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
         import datetime
 
         get_date = datetime.date.today()
-        add_record_to_chart = Chart.objects.create(complaint=instance.complainant, crime=instance.crime,start_date=get_date)
+        add_record_to_chart = Chart.objects.create(complaint=instance.complainant, crime=instance.crime,
+                                                   start_date=get_date)
 
         URL = 'https://apisms.beem.africa/v1/send'
         api_key = '2799f1a807695012'
@@ -138,9 +139,10 @@ def generate_rb(sender, instance, created, raw=False, **kwargs):
 
         user_id = instance.complainant.user.id
 
-        message_body = f"Habari,Ndugu Namba: {full_name}, \nJarada lako limefunguliwa kikamilifu kwa RB:\n {get_rb_string}" \
-                       f"\nWaweza Bofya *384*654444# kufuatilia mwenendo wa " \
-                       f"jarada\nAu ingia kwenye tovuti Kwa taarifa zaidi \n https://crms-police.herokuapp.com/"
+        message_body = f"Hello: {full_name}, \nyour case was successfully registered with RB:\n {get_rb_string}" \
+                       f"\nyou can dial *384*654444# to keep track" \
+                       f"of the RB\n or visit \n https://crms-police.herokuapp.com/\n" \
+                       f"for more information"
 
         first_request = requests.post(url=URL, data=json.dumps({
             'source_addr': source_addr,
@@ -199,9 +201,11 @@ def send_investigation_alert(sender, instance, created, **kwargs):
 
         user_id = instance.case_investigator.case.complainant.user.id
 
-        message_body = f"Habari,Ndugu Namba: {code}, \nJarada namba:\n {get_rb}" \
-                       f"\nLimefanyiwa maboresho, tafadhali ingia kwenye tovuti kwa taarifa zaidi\n" \
-                       f"https://crms-police.herokuapp.com/"
+        message_body = f"Hello complainant with code number: {code},\nchanges on the progress of the case with file " \
+                       f"number:\n {get_rb}" \
+                       f"\nhas been done, please login to the police site\n" \
+                       f"https://crms-police.herokuapp.com/\n" \
+                       f"for more information\n"
 
         print(message_body)
         first_request = requests.post(url=URL, data=json.dumps({
@@ -265,8 +269,9 @@ def send_feedback_to_complaint(sender, instance, created, **kwargs):
 
         user_id = instance.user.id
 
-        message_body = f"Habari,Ndugu {full_name}, \nUmesajiliwa Kikamilifu kwenye Mfumo wa Polisi kwa namba {code}" \
-                       f"\nWaweza kuingia kwenye Mfumo  kupitia\n" \
+        message_body = f"Hello, {full_name}, \nyou have been fully registered on the police system with a complainant " \
+                       f"code {code}" \
+                       f"\nyou can access the system via\n" \
                        f"https://crms-police.herokuapp.com/" \
                        f"\n username:{username},\n password:{password} "
 
@@ -327,8 +332,9 @@ def send_feedback_to_complaint(sender, instance, created, **kwargs):
 
         user_id = instance.user.id
 
-        message_body = f"Habari,Ndugu {full_name}, \nUsajili wako umekamilika kwa namba {code}" \
-                       f"\nFika kituo chochote cha polisi ili kuripoti kesi\n"
+        message_body = f"Hello, {full_name}, \nyou have been successful registered to a police system with a " \
+                       f"complainant code {code}" \
+                       f"\nyou can now approach any police station to report a case\n"
         print(message_body)
         first_request = requests.post(url=URL, data=json.dumps({
             'source_addr': source_addr,
@@ -357,4 +363,3 @@ def send_feedback_to_complaint(sender, instance, created, **kwargs):
         print(first_request.json())
 
         # return (first_request.json())
-
